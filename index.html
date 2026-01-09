@@ -129,146 +129,161 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        // --- FORM GÖNDERME (SAYFA YENİLEMEDEN) ---
-        var form = document.getElementById("my-form");
-        
-        async function handleSubmit(event) {
-          event.preventDefault();
-          var status = document.getElementById("my-form-status");
-          var data = new FormData(event.target);
-          fetch(event.target.action, {
+   <script>
+    // --- FORM GÖNDERME (SAYFA YENİLEMEDEN) ---
+    var form = document.getElementById("my-form");
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        var status = document.getElementById("my-form-status");
+        var data = new FormData(event.target);
+        fetch(event.target.action, {
             method: form.method,
             body: data,
             headers: {
                 'Accept': 'application/json'
             }
-          }).then(response => {
+        }).then(response => {
             if (response.ok) {
-              status.innerHTML = "✅ Mesajınız başarıyla gönderildi! Sizinle en kısa sürede iletişime geçeceğiz.";
-              status.style.display = "block";
-              status.style.backgroundColor = "#d4edda";
-              status.style.color = "#155724";
-              status.style.border = "1px solid #c3e6cb";
-              form.reset();
+                status.innerHTML = "✅ Mesajınız başarıyla gönderildi! Sizinle en kısa sürede iletişime geçeceğiz.";
+                status.style.display = "block";
+                status.style.backgroundColor = "#d4edda";
+                status.style.color = "#155724";
+                status.style.border = "1px solid #c3e6cb";
+                form.reset();
             } else {
-              response.json().then(data => {
-                if (Object.hasOwn(data, 'errors')) {
-                  status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-                } else {
-                  status.innerHTML = "❌ Bir sorun oluştu, lütfen formu kontrol edip tekrar deneyin.";
-                }
-              })
+                response.json().then(data => {
+                    if (Object.hasOwn(data, 'errors')) {
+                        status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                    } else {
+                        status.innerHTML = "❌ Bir sorun oluştu, lütfen formu kontrol edip tekrar deneyin.";
+                    }
+                })
             }
-          }).catch(error => {
+        }).catch(error => {
             status.innerHTML = "❌ İletişim hatası! Lütfen internetinizi kontrol edin.";
             status.style.display = "block";
             status.style.backgroundColor = "#f8d7da";
             status.style.color = "#721c24";
-          });
+        });
+    }
+    form.addEventListener("submit", handleSubmit)
+
+    // --- MOBİL MENÜ (DIŞARI TIKLAMA ÖZELLİĞİ EKLENDİ) ---
+    const menu = document.querySelector('#mobile-menu');
+    const menuLinks = document.querySelector('#nav-list');
+
+    menu.addEventListener('click', (e) => {
+        e.stopPropagation(); // Tıklamanın dışarı sızmasını engeller
+        menuLinks.classList.toggle('active');
+        menu.classList.toggle('is-active');
+    });
+
+    // Menü dışındaki herhangi bir yere tıklandığında menüyü kapatır
+    document.addEventListener('click', (e) => {
+        const isMenuOpen = menuLinks.classList.contains('active');
+        const isClickInsideMenu = menuLinks.contains(e.target);
+        const isClickOnButton = menu.contains(e.target);
+
+        if (isMenuOpen && !isClickInsideMenu && !isClickOnButton) {
+            menuLinks.classList.remove('active');
+            menu.classList.remove('is-active');
         }
-        form.addEventListener("submit", handleSubmit)
+    });
 
-        // --- MOBİL MENÜ ---
-        const menu = document.querySelector('#mobile-menu');
-        const menuLinks = document.querySelector('#nav-list');
-        menu.addEventListener('click', () => {
-            menuLinks.classList.toggle('active');
-            menu.classList.toggle('is-active');
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuLinks.classList.remove('active');
+            menu.classList.remove('is-active');
         });
+    });
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuLinks.classList.remove('active');
-                menu.classList.remove('is-active');
-            });
-        });
+    // --- SAYAÇ ---
+    const sayilar = document.querySelectorAll('.sayi');
+    sayilar.forEach(sayi => {
+        const hedef = +sayi.getAttribute('data-target');
+        const guncelle = () => {
+            const suAnki = +sayi.innerText.replace('+', '');
+            const artis = hedef / 100;
+            if (suAnki < hedef) {
+                sayi.innerText = Math.ceil(suAnki + artis);
+                setTimeout(guncelle, 20);
+            } else { sayi.innerText = hedef + "+"; }
+        };
+        guncelle();
+    });
 
-        // --- SAYAÇ ---
-        const sayilar = document.querySelectorAll('.sayi');
-        sayilar.forEach(sayi => {
-            const hedef = +sayi.getAttribute('data-target');
-            const guncelle = () => {
-                const suAnki = +sayi.innerText.replace('+', '');
-                const artis = hedef / 100;
-                if (suAnki < hedef) {
-                    sayi.innerText = Math.ceil(suAnki + artis);
-                    setTimeout(guncelle, 20);
-                } else { sayi.innerText = hedef + "+"; }
-            };
-            guncelle();
-        });
+    // --- SLIDER ---
+    let currentIdx = 0;
+    const track = document.querySelector('.slider-track');
+    const slides = document.querySelectorAll('.slide');
 
-        // --- SLIDER ---
-        let currentIdx = 0;
-        const track = document.querySelector('.slider-track');
-        const slides = document.querySelectorAll('.slide');
+    function updateSlider() {
+        const isMobile = window.innerWidth <= 768;
+        const moveAmount = isMobile ? 100 : 33.333;
+        const maxIdx = isMobile ? slides.length - 1 : slides.length - 3;
+        if (currentIdx > maxIdx) currentIdx = 0;
+        if (currentIdx < 0) currentIdx = maxIdx;
+        track.style.transform = `translateX(-${currentIdx * moveAmount}%)`;
+    }
 
-        function updateSlider() {
-            const isMobile = window.innerWidth <= 768;
-            const moveAmount = isMobile ? 100 : 33.333;
-            const maxIdx = isMobile ? slides.length - 1 : slides.length - 3;
-            if (currentIdx > maxIdx) currentIdx = 0;
-            if (currentIdx < 0) currentIdx = maxIdx;
-            track.style.transform = `translateX(-${currentIdx * moveAmount}%)`;
-        }
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        currentIdx++;
+        updateSlider();
+        resetTimer();
+    });
 
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            currentIdx++;
-            updateSlider();
-            resetTimer();
-        });
+    document.getElementById('prevBtn').addEventListener('click', () => {
+        currentIdx--;
+        updateSlider();
+        resetTimer();
+    });
 
-        document.getElementById('prevBtn').addEventListener('click', () => {
-            currentIdx--;
-            updateSlider();
-            resetTimer();
-        });
+    let autoSlide = setInterval(() => {
+        currentIdx++;
+        updateSlider();
+    }, 3000);
 
-        let autoSlide = setInterval(() => {
+    function resetTimer() {
+        clearInterval(autoSlide);
+        autoSlide = setInterval(() => {
             currentIdx++;
             updateSlider();
         }, 3000);
+    }
 
-        function resetTimer() {
-            clearInterval(autoSlide);
-            autoSlide = setInterval(() => {
-                currentIdx++;
-                updateSlider();
-            }, 3000);
+    window.addEventListener('resize', updateSlider);
+
+    // --- MODAL ---
+    const modal = document.getElementById("resimModal");
+    const modalImg = document.getElementById("buyukResim");
+
+    document.querySelectorAll('.slide img').forEach(resim => {
+        resim.onclick = function(){
+            modal.style.display = "block";
+            modalImg.src = this.src;
         }
+    });
 
-        window.addEventListener('resize', updateSlider);
+    function modalKapat() { modal.style.display = "none"; }
 
-        // --- MODAL ---
-        const modal = document.getElementById("resimModal");
-        const modalImg = document.getElementById("buyukResim");
+    window.onclick = function(event) {
+        if (event.target == modal) { modal.style.display = "none"; }
+    }
 
-        document.querySelectorAll('.slide img').forEach(resim => {
-            resim.onclick = function(){
-                modal.style.display = "block";
-                modalImg.src = this.src;
-            }
-        });
-
-        function modalKapat() { modal.style.display = "none"; }
-
-        window.onclick = function(event) {
-            if (event.target == modal) { modal.style.display = "none"; }
+    // --- PARTICLES ---
+    particlesJS("particles-js", {
+        "particles": {
+            "number": { "value": 40 },
+            "color": { "value": "#ffffff" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.2 },
+            "size": { "value": 3 },
+            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+            "move": { "enable": true, "speed": 1.5 }
         }
-
-        // --- PARTICLES ---
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 40 },
-                "color": { "value": "#ffffff" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.2 },
-                "size": { "value": 3 },
-                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
-                "move": { "enable": true, "speed": 1.5 }
-            }
-        });
-    </script>
+    });
+</script>
 </body>
 </html>
+
