@@ -151,35 +151,29 @@
         };
         baslatSayac();
 
-        // --- 2. MOBİL MENÜ SİSTEMİ (GÜNCELLENDİ) ---
+        // --- 2. MOBİL MENÜ SİSTEMİ (KESİN ÇÖZÜM) ---
         const menu = document.querySelector('#mobile-menu');
         const menuLinks = document.querySelector('#nav-list');
         const body = document.querySelector('body');
 
         if (menu && menuLinks) {
-            // Hamburger butonuna basınca aç/kapat
             menu.addEventListener('click', (e) => {
-                e.stopPropagation(); // Tıklamanın document'a sızmasını engeller
+                e.stopPropagation(); 
                 menuLinks.classList.toggle('active');
                 menu.classList.toggle('is-active');
                 body.classList.toggle('no-scroll');
             });
 
-            // DIŞARIYA DOKUNUNCA KAPANMA GARANTİSİ
+            // Menü dışındaki boşluğa dokunulduğunda kapatma
             document.addEventListener('click', (e) => {
                 const isMenuOpen = menuLinks.classList.contains('active');
-                const clickedInsideMenu = menuLinks.contains(e.target);
-                const clickedMenuBtn = menu.contains(e.target);
-
-                // Menü açıksa VE tıklanan yer menü içi veya buton değilse KAPAT
-                if (isMenuOpen && !clickedInsideMenu && !clickedMenuBtn) {
+                if (isMenuOpen && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
                     menuLinks.classList.remove('active');
                     menu.classList.remove('is-active');
                     body.classList.remove('no-scroll');
                 }
             });
 
-            // Linklere basınca menüyü kapat
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     menuLinks.classList.remove('active');
@@ -201,10 +195,8 @@
             const isMobile = window.innerWidth <= 768;
             const moveAmount = isMobile ? 100 : 33.333;
             const maxIdx = isMobile ? slides.length - 1 : slides.length - 3;
-            
             if (currentIdx > maxIdx) currentIdx = 0;
             if (currentIdx < 0) currentIdx = maxIdx;
-            
             track.style.transform = `translateX(-${currentIdx * moveAmount}%)`;
         }
 
@@ -231,16 +223,13 @@
                         headers: { 'Accept': 'application/json' }
                     });
                     if (response.ok) {
-                        status.innerHTML = "✅ Mesajınız başarıyla gönderildi!";
+                        status.innerHTML = "✅ Mesajınız gönderildi!";
                         status.style.display = "block";
                         status.style.backgroundColor = "#d4edda";
                         form.reset();
-                    } else {
-                        status.innerHTML = "❌ Bir hata oluştu.";
-                        status.style.display = "block";
                     }
                 } catch (e) {
-                    status.innerHTML = "❌ Bağlantı hatası.";
+                    status.innerHTML = "❌ Hata oluştu.";
                     status.style.display = "block";
                 }
             });
@@ -275,6 +264,7 @@
 </script>
 </body>
 </html>
+
 
 
 
