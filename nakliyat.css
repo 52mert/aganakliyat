@@ -433,5 +433,31 @@ html, body {
     .kart img, .slide img {
         height: 200px !important; /* Mobilde biraz daha küçük olsun */
     }
+}/* MOBİLDE SLIDER VE KART DÜZENİ (1 RESİM GÖZÜKSÜN) */
+@media screen and (max-width: 768px) {
+    /* Slider içindeki her bir resmi tam genişlik yap */
+    .slide {
+        min-width: 100% !important;
+        flex: 0 0 100% !important;
+    }
+
+    /* Slider boşluklarını mobilde sıfırla ki resim tam otursun */
+    .slider-track {
+        gap: 0 !important;
+    }
+
+    /* Hizmet kartlarını da mobilde tekli ve tam genişlik yap */
+    .kart {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
 }
+
+/* PC İÇİN (3 RESİM DÜZENİ) */
+@media screen and (min-width: 769px) {
+    .slide {
+        min-width: calc(33.333% - 10px) !important;
+    }
+}
+
 
