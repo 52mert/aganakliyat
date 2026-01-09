@@ -169,40 +169,40 @@
         }
         form.addEventListener("submit", handleSubmit)
 
-      // --- GÜNCELLENMİŞ VE GARANTİ MOBİL MENÜ ---
+ // --- MOBİL MENÜ SİSTEMİ ---
 const menu = document.querySelector('#mobile-menu');
 const menuLinks = document.querySelector('#nav-list');
 const body = document.querySelector('body');
 
-// Menü butonuna (hamburger) basınca aç/kapat
-menu.addEventListener('click', (e) => {
-    e.stopPropagation(); // Butona basıldığında "dışarı tıklandı" algısını engeller
-    menuLinks.classList.toggle('active');
-    menu.classList.toggle('is-active');
-    body.classList.toggle('no-scroll');
-});
+if (menu && menuLinks) { // Kodun hata vermemesi için kontrol ekledik
+    // Menü butonuna basınca aç/kapat
+    menu.addEventListener('click', (e) => {
+        e.stopPropagation(); 
+        menuLinks.classList.toggle('active');
+        menu.classList.toggle('is-active');
+        body.classList.toggle('no-scroll');
+    });
 
-// Sayfada herhangi bir yere tıklandığında
-document.addEventListener('click', (e) => {
-    // Menü aktifse (açıksa)
-    if (menuLinks.classList.contains('active')) {
-        // Tıklanan yer menünün kendisi DEĞİLSE ve buton DEĞİLSE
-        if (!menuLinks.contains(e.target) && !menu.contains(e.target)) {
+    // Menü dışına dokununca kapatma
+    document.addEventListener('click', (e) => {
+        if (menuLinks.classList.contains('active')) {
+            if (!menuLinks.contains(e.target) && !menu.contains(e.target)) {
+                menuLinks.classList.remove('active');
+                menu.classList.remove('is-active');
+                body.classList.remove('no-scroll');
+            }
+        }
+    });
+
+    // Linklere basınca kapatma
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
             menuLinks.classList.remove('active');
             menu.classList.remove('is-active');
             body.classList.remove('no-scroll');
-        }
-    }
-});
-
-// Menü içindeki linklerden birine basınca her şeyi kapat ve sayfayı çöz
-document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        menuLinks.classList.remove('active');
-        menu.classList.remove('is-active');
-        body.classList.remove('no-scroll');
+        });
     });
-});-
+}
 
 
         // --- SAYAÇ ---
@@ -293,5 +293,6 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     </script>
 </body>
 </html>
+
 
 
