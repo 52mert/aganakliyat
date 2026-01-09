@@ -140,7 +140,7 @@
         const menu = document.querySelector('#mobile-menu');
         const menuLinks = document.querySelector('#nav-list');
         const body = document.querySelector('body');
-
+        
         // --- 1. MOBİL MENÜ SİSTEMİ (GARANTİLİ KAPATMA) ---
         if (menu && menuLinks) {
             menu.addEventListener('click', (e) => {
@@ -150,7 +150,6 @@
                 body.classList.toggle('no-scroll');
             });
 
-            // Ekranda herhangi bir yere dokunulduğunda çalışır
             document.addEventListener('click', (e) => {
                 const isMenuOpen = menuLinks.classList.contains('active');
                 if (isMenuOpen && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
@@ -241,33 +240,60 @@
             });
         }
 
-        // --- 5. MODAL (RESİM BÜYÜTME - MOBİL UYUMLU) ---
+        // --- 5. MODAL (GELİŞMİŞ GEÇİŞLİ SERİ SİSTEMİ) ---
         const modal = document.getElementById("resimModal");
         const modalImg = document.getElementById("buyukResim");
-        
-        // Sadece slider değil, kartlardaki resimlere de tıklama ekledik
-        document.querySelectorAll('.slide img, .kart img').forEach(resim => {
+        let tumResimler = Array.from(document.querySelectorAll('.slide img, .kart img'));
+        let suAnkiResimIdx = 0;
+        let sonKonum = 0; // Sayfa zıplamasını engellemek için
+
+        function resimGuncelle(index) {
+            modalImg.src = tumResimler[index].src;
+        }
+
+        tumResimler.forEach((resim, index) => {
             resim.style.cursor = "pointer";
-            resim.onclick = function() {
-                if(modal && modalImg) { 
-                    modal.style.display = "flex"; // "block" yerine "flex" yaparak tam ortalıyoruz
-                    modalImg.src = this.src; 
-                    body.classList.add('no-scroll');
-                }
-            }
+            resim.addEventListener('click', () => {
+                sonKonum = window.pageYOffset; // Tıklanan yerin konumunu al
+                suAnkiResimIdx = index;
+                resimGuncelle(suAnkiResimIdx);
+                modal.style.display = "flex";
+                body.style.top = `-${sonKonum}px`; // Sayfayı o anki konumda kilitle
+                body.classList.add('no-scroll');
+            });
         });
 
         window.modalKapat = function() { 
             if(modal) {
                 modal.style.display = "none"; 
                 body.classList.remove('no-scroll');
+                body.style.top = '';
+                window.scrollTo(0, sonKonum); // Kaydedilen yere geri gönder (Zıplamayı önler)
             }
         }
-        
-        // Resim açıkken dışına basınca kapat
-        window.onclick = function(event) { 
-            if (event.target == modal) { modalKapat(); } 
+
+        // Seri Geçiş Fonksiyonları
+        window.sonrakiResim = function(e) {
+            if(e) e.stopPropagation();
+            suAnkiResimIdx = (suAnkiResimIdx + 1) % tumResimler.length;
+            resimGuncelle(suAnkiResimIdx);
         }
+
+        window.oncekiResim = function(e) {
+            if(e) e.stopPropagation();
+            suAnkiResimIdx = (suAnkiResimIdx - 1 + tumResimler.length) % tumResimler.length;
+            resimGuncelle(suAnkiResimIdx);
+        }
+        
+        window.onclick = function(event) { if (event.target == modal) { modalKapat(); } }
+
+        // Klavyeden sağ-sol oklarla geçiş
+        document.addEventListener('keydown', (e) => {
+            if (modal.style.display === "flex") {
+                if (e.key === "ArrowRight") sonrakiResim();
+                if (e.key === "ArrowLeft") oncekiResim();
+            }
+        });
 
         // --- PARTICLES ---
         if(window.particlesJS) {
@@ -287,6 +313,7 @@
 </script>
 </body>
 </html>
+
 
 
 
