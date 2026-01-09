@@ -243,39 +243,50 @@
             });
         }
 
-        // --- 5. MODAL (GELİŞMİŞ GEÇİŞLİ SERİ SİSTEMİ) ---
+        // --- 5. MODAL (GELİŞMİŞ GEÇİŞLİ SERİ SİSTEMİ - ZIPLAMA ÖNLEYİCİ) ---
         const modal = document.getElementById("resimModal");
         const modalImg = document.getElementById("buyukResim");
         let tumResimler = Array.from(document.querySelectorAll('.slide img, .kart img'));
         let suAnkiResimIdx = 0;
-        let sonKonum = 0; // Sayfa zıplamasını engellemek için
+        let sonKonum = 0; 
 
         function resimGuncelle(index) {
-            modalImg.src = tumResimler[index].src;
+            if (tumResimler[index]) {
+                modalImg.src = tumResimler[index].src;
+            }
         }
 
         tumResimler.forEach((resim, index) => {
             resim.style.cursor = "pointer";
             resim.addEventListener('click', () => {
-                sonKonum = window.pageYOffset; // Tıklanan yerin konumunu al
+                // ZIPLAMAYI ÖNLEYEN KRİTİK HAMLE
+                sonKonum = window.pageYOffset || document.documentElement.scrollTop;
                 suAnkiResimIdx = index;
                 resimGuncelle(suAnkiResimIdx);
+                
                 modal.style.display = "flex";
-                body.style.top = `-${sonKonum}px`; // Sayfayı o anki konumda kilitle
-                body.classList.add('no-scroll');
+                
+                // Arka planı kilitle ama sayfanın zıplamasını engelle
+                body.style.position = 'fixed';
+                body.style.top = `-${sonKonum}px`;
+                body.style.width = '100%';
             });
         });
 
         window.modalKapat = function() { 
-            if(modal) {
+            if(modal && modal.style.display === "flex") {
                 modal.style.display = "none"; 
-                body.classList.remove('no-scroll');
+                
+                // Kilidi kaldır
+                body.style.position = '';
                 body.style.top = '';
-                window.scrollTo(0, sonKonum); // Kaydedilen yere geri gönder (Zıplamayı önler)
+                body.style.width = '';
+                
+                // Kaydedilen yere geri ışınla
+                window.scrollTo(0, sonKonum);
             }
         }
 
-        // Seri Geçiş Fonksiyonları
         window.sonrakiResim = function(e) {
             if(e) e.stopPropagation();
             suAnkiResimIdx = (suAnkiResimIdx + 1) % tumResimler.length;
@@ -290,11 +301,11 @@
         
         window.onclick = function(event) { if (event.target == modal) { modalKapat(); } }
 
-        // Klavyeden sağ-sol oklarla geçiş
         document.addEventListener('keydown', (e) => {
             if (modal.style.display === "flex") {
                 if (e.key === "ArrowRight") sonrakiResim();
                 if (e.key === "ArrowLeft") oncekiResim();
+                if (e.key === "Escape") modalKapat();
             }
         });
 
@@ -316,6 +327,7 @@
 </script>
 </body>
 </html>
+
 
 
 
