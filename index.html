@@ -123,83 +123,88 @@
         </svg>
     </a>
 
-  <div id="resimModal" class="modal">
-    <span class="kapat" onclick="modalKapat()">&times;</span>
-    
-    <button class="modal-nav modal-prev" onclick="oncekiResim(event)">&#10094;</button>
-    <button class="modal-nav modal-next" onclick="sonrakiResim(event)">&#10095;</button>
-    
-    <img class="modal-icerik" id="buyukResim">
-</div>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        // --- 0. SAYFAYI EN ÜSTE ZORLA VE ZIPLAMAYI ENGELLE ---
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        window.scrollTo(0, 0);
+    <div id="resimModal" class="modal">
+        <span class="kapat" onclick="modalKapat()">&times;</span>
+        <img class="modal-icerik" id="buyukResim">
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // --- FORM GÖNDERME (SAYFA YENİLEMEDEN) ---
+        var form = document.getElementById("my-form");
+        
+        async function handleSubmit(event) {
+          event.preventDefault();
+          var status = document.getElementById("my-form-status");
+          var data = new FormData(event.target);
+          fetch(event.target.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+          }).then(response => {
+            if (response.ok) {
+              status.innerHTML = "✅ Mesajınız başarıyla gönderildi! Sizinle en kısa sürede iletişime geçeceğiz.";
+              status.style.display = "block";
+              status.style.backgroundColor = "#d4edda";
+              status.style.color = "#155724";
+              status.style.border = "1px solid #c3e6cb";
+              form.reset();
+            } else {
+              response.json().then(data => {
+                if (Object.hasOwn(data, 'errors')) {
+                  status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
+                } else {
+                  status.innerHTML = "❌ Bir sorun oluştu, lütfen formu kontrol edip tekrar deneyin.";
+                }
+              })
+            }
+          }).catch(error => {
+            status.innerHTML = "❌ İletişim hatası! Lütfen internetinizi kontrol edin.";
+            status.style.display = "block";
+            status.style.backgroundColor = "#f8d7da";
+            status.style.color = "#721c24";
+          });
+        }
+        form.addEventListener("submit", handleSubmit)
+
+        // --- MOBİL MENÜ ---
         const menu = document.querySelector('#mobile-menu');
         const menuLinks = document.querySelector('#nav-list');
-        const body = document.querySelector('body');
-        
-        // --- 1. MOBİL MENÜ SİSTEMİ (GARANTİLİ KAPATMA) ---
-        if (menu && menuLinks) {
-            menu.addEventListener('click', (e) => {
-                e.stopPropagation(); 
-                menuLinks.classList.toggle('active');
-                menu.classList.toggle('is-active');
-                body.classList.toggle('no-scroll');
-            });
+        menu.addEventListener('click', () => {
+            menuLinks.classList.toggle('active');
+            menu.classList.toggle('is-active');
+        });
 
-            document.addEventListener('click', (e) => {
-                const isMenuOpen = menuLinks.classList.contains('active');
-                if (isMenuOpen && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
-                    menuLinks.classList.remove('active');
-                    menu.classList.remove('is-active');
-                    body.classList.remove('no-scroll');
-                }
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuLinks.classList.remove('active');
+                menu.classList.remove('is-active');
             });
+        });
 
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    menuLinks.classList.remove('active');
-                    menu.classList.remove('is-active');
-                    body.classList.remove('no-scroll');
-                });
-            });
-        }
+        // --- SAYAÇ ---
+        const sayilar = document.querySelectorAll('.sayi');
+        sayilar.forEach(sayi => {
+            const hedef = +sayi.getAttribute('data-target');
+            const guncelle = () => {
+                const suAnki = +sayi.innerText.replace('+', '');
+                const artis = hedef / 100;
+                if (suAnki < hedef) {
+                    sayi.innerText = Math.ceil(suAnki + artis);
+                    setTimeout(guncelle, 20);
+                } else { sayi.innerText = hedef + "+"; }
+            };
+            guncelle();
+        });
 
-        // --- 2. SAYAÇ SİSTEMİ ---
-        const baslatSayac = () => {
-            const sayilar = document.querySelectorAll('.sayi');
-            sayilar.forEach(sayi => {
-                const hedef = +sayi.getAttribute('data-target');
-                const guncelle = () => {
-                    const suAnki = +sayi.innerText.replace('+', '');
-                    const artis = hedef / 100;
-                    if (suAnki < hedef) {
-                        sayi.innerText = Math.ceil(suAnki + artis);
-                        setTimeout(guncelle, 25);
-                    } else { 
-                        sayi.innerText = hedef + "+"; 
-                    }
-                };
-                setTimeout(guncelle, 300);
-            });
-        };
-        baslatSayac();
-
-        // --- 3. SLIDER SİSTEMİ ---
+        // --- SLIDER ---
         let currentIdx = 0;
         const track = document.querySelector('.slider-track');
         const slides = document.querySelectorAll('.slide');
-        const nextBtn = document.getElementById('nextBtn');
-        const prevBtn = document.getElementById('prevBtn');
 
         function updateSlider() {
-            if(!track) return;
             const isMobile = window.innerWidth <= 768;
             const moveAmount = isMobile ? 100 : 33.333;
             const maxIdx = isMobile ? slides.length - 1 : slides.length - 3;
@@ -208,135 +213,62 @@
             track.style.transform = `translateX(-${currentIdx * moveAmount}%)`;
         }
 
-        if(nextBtn && prevBtn) {
-            nextBtn.addEventListener('click', () => { currentIdx++; updateSlider(); resetTimer(); });
-            prevBtn.addEventListener('click', () => { currentIdx--; updateSlider(); resetTimer(); });
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            currentIdx++;
+            updateSlider();
+            resetTimer();
+        });
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            currentIdx--;
+            updateSlider();
+            resetTimer();
+        });
+
+        let autoSlide = setInterval(() => {
+            currentIdx++;
+            updateSlider();
+        }, 3000);
+
+        function resetTimer() {
+            clearInterval(autoSlide);
+            autoSlide = setInterval(() => {
+                currentIdx++;
+                updateSlider();
+            }, 3000);
         }
 
-        let autoSlide = setInterval(() => { currentIdx++; updateSlider(); }, 3000);
-        function resetTimer() { clearInterval(autoSlide); autoSlide = setInterval(() => { currentIdx++; updateSlider(); }, 3000); }
         window.addEventListener('resize', updateSlider);
 
-        // --- 4. FORM GÖNDERME ---
-        const form = document.getElementById("my-form");
-        if(form) {
-            form.addEventListener("submit", async (event) => {
-                event.preventDefault();
-                const status = document.getElementById("my-form-status");
-                const data = new FormData(event.target);
-                try {
-                    const response = await fetch(event.target.action, {
-                        method: form.method,
-                        body: data,
-                        headers: { 'Accept': 'application/json' }
-                    });
-                    if (response.ok) {
-                        status.innerHTML = "✅ Mesajınız gönderildi!";
-                        status.style.display = "block";
-                        status.style.backgroundColor = "#d4edda";
-                        form.reset();
-                    }
-                } catch (e) {
-                    status.innerHTML = "❌ Hata oluştu.";
-                    status.style.display = "block";
-                }
-            });
-        }
-
-        // --- 5. MODAL (GELİŞMİŞ GEÇİŞLİ SERİ SİSTEMİ - ZIPLAMA ÖNLEYİCİ) ---
+        // --- MODAL ---
         const modal = document.getElementById("resimModal");
         const modalImg = document.getElementById("buyukResim");
-        let tumResimler = Array.from(document.querySelectorAll('.slide img, .kart img'));
-        let suAnkiResimIdx = 0;
-        let sonKonum = 0; 
 
-        function resimGuncelle(index) {
-            if (tumResimler[index]) {
-                modalImg.src = tumResimler[index].src;
-            }
-        }
-
-        tumResimler.forEach((resim, index) => {
-            resim.style.cursor = "pointer";
-            resim.addEventListener('click', () => {
-                // ZIPLAMAYI ÖNLEYEN KRİTİK HAMLE
-                sonKonum = window.pageYOffset || document.documentElement.scrollTop;
-                suAnkiResimIdx = index;
-                resimGuncelle(suAnkiResimIdx);
-                
-                modal.style.display = "flex";
-                
-                // Arka planı kilitle ama sayfanın zıplamasını engelle
-                body.style.position = 'fixed';
-                body.style.top = `-${sonKonum}px`;
-                body.style.width = '100%';
-            });
-        });
-
-        window.modalKapat = function() { 
-            if(modal && modal.style.display === "flex") {
-                modal.style.display = "none"; 
-                
-                // Kilidi kaldır
-                body.style.position = '';
-                body.style.top = '';
-                body.style.width = '';
-                
-                // Kaydedilen yere geri ışınla
-                window.scrollTo(0, sonKonum);
-            }
-        }
-
-        window.sonrakiResim = function(e) {
-            if(e) e.stopPropagation();
-            suAnkiResimIdx = (suAnkiResimIdx + 1) % tumResimler.length;
-            resimGuncelle(suAnkiResimIdx);
-        }
-
-        window.oncekiResim = function(e) {
-            if(e) e.stopPropagation();
-            suAnkiResimIdx = (suAnkiResimIdx - 1 + tumResimler.length) % tumResimler.length;
-            resimGuncelle(suAnkiResimIdx);
-        }
-        
-        window.onclick = function(event) { if (event.target == modal) { modalKapat(); } }
-
-        document.addEventListener('keydown', (e) => {
-            if (modal.style.display === "flex") {
-                if (e.key === "ArrowRight") sonrakiResim();
-                if (e.key === "ArrowLeft") oncekiResim();
-                if (e.key === "Escape") modalKapat();
+        document.querySelectorAll('.slide img').forEach(resim => {
+            resim.onclick = function(){
+                modal.style.display = "block";
+                modalImg.src = this.src;
             }
         });
+
+        function modalKapat() { modal.style.display = "none"; }
+
+        window.onclick = function(event) {
+            if (event.target == modal) { modal.style.display = "none"; }
+        }
 
         // --- PARTICLES ---
-        if(window.particlesJS) {
-            particlesJS("particles-js", {
-                "particles": {
-                    "number": { "value": 40 },
-                    "color": { "value": "#ffffff" },
-                    "shape": { "type": "circle" },
-                    "opacity": { "value": 0.2 },
-                    "size": { "value": 3 },
-                    "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
-                    "move": { "enable": true, "speed": 1.5 }
-                }
-            });
-        }
-    });
-</script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 40 },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.2 },
+                "size": { "value": 3 },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
+                "move": { "enable": true, "speed": 1.5 }
+            }
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
