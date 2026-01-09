@@ -1008,4 +1008,7 @@ footer {
         z-index: -1;
     }
 }
+.nav-links.active {
+    z-index: 1000; /* Menü her şeyin üstünde olsun */
+}
 
