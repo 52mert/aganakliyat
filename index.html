@@ -169,38 +169,41 @@
         }
         form.addEventListener("submit", handleSubmit)
 
-        // --- GELİŞMİŞ MOBİL MENÜ ---
+      // --- GÜNCELLENMİŞ VE GARANTİ MOBİL MENÜ ---
 const menu = document.querySelector('#mobile-menu');
 const menuLinks = document.querySelector('#nav-list');
 const body = document.querySelector('body');
 
 // Menü butonuna (hamburger) basınca aç/kapat
 menu.addEventListener('click', (e) => {
-    e.stopPropagation(); // Tıklamanın sayfaya yayılmasını engeller
+    e.stopPropagation(); // Butona basıldığında "dışarı tıklandı" algısını engeller
     menuLinks.classList.toggle('active');
     menu.classList.toggle('is-active');
-    body.classList.toggle('no-scroll'); // Menü açıkken arka taraf kaymaz
+    body.classList.toggle('no-scroll');
 });
 
-// Menü dışındaki herhangi bir yere basınca kapat
+// Sayfada herhangi bir yere tıklandığında
 document.addEventListener('click', (e) => {
-    // Menü açıksa ve tıklanan yer menü kutusu veya buton değilse kapat
-    if (menuLinks.classList.contains('active') && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
-        menuLinks.classList.remove('active');
-        menu.classList.remove('is-active');
-        body.classList.remove('no-scroll');
+    // Menü aktifse (açıksa)
+    if (menuLinks.classList.contains('active')) {
+        // Tıklanan yer menünün kendisi DEĞİLSE ve buton DEĞİLSE
+        if (!menuLinks.contains(e.target) && !menu.contains(e.target)) {
+            menuLinks.classList.remove('active');
+            menu.classList.remove('is-active');
+            body.classList.remove('no-scroll');
+        }
     }
 });
 
-// Linklerden birine basınca menüyü kapat
+// Menü içindeki linklerden birine basınca her şeyi kapat ve sayfayı çöz
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         menuLinks.classList.remove('active');
         menu.classList.remove('is-active');
         body.classList.remove('no-scroll');
     });
-});
-      
+});-
+
 
         // --- SAYAÇ ---
         const sayilar = document.querySelectorAll('.sayi');
@@ -290,4 +293,5 @@ document.querySelectorAll('.nav-links a').forEach(link => {
     </script>
 </body>
 </html>
+
 
