@@ -459,5 +459,12 @@ html, body {
         min-width: calc(33.333% - 10px) !important;
     }
 }
+@media screen and (max-width: 768px) {
+    /* Menü dışındaki karartmanın tıklamayı algılamasını sağlar */
+    .nav-links.active::after {
+        pointer-events: auto !important;
+        cursor: pointer;
+    }
+}
 
 
