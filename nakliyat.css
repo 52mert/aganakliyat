@@ -9,12 +9,9 @@ body {
     overflow-x: hidden;
 }
 
-/* Menü açıkken arka plan kilitlenmesi */
+/* Menü ve Modal açıkken arka plan kilitlenmesi - ZIPLAMA YAPMAYAN VERSİYON */
 .no-scroll {
     overflow: hidden !important;
-    height: 100vh !important;
-    position: fixed;
-    width: 100%;
 }
 
 /* 2. NAVBAR */
@@ -70,7 +67,7 @@ body {
     margin-top: 20px;
 }
 
-/* 4. KARTLAR VE RESİMLER (DİKDÖRTGEN BOZULMASINI ÖNLER) */
+/* 4. KARTLAR VE RESİMLER */
 .bolum-basligi { text-align: center; margin: 40px 0; font-size: 2rem; color: #002d5b; }
 .kart-konteynir { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 0 5%; }
 .kart { background: white; width: 300px; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
@@ -115,11 +112,10 @@ body {
 
 @keyframes titret { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
 
-/* 7. MOBİL AYARLAR (TEK BİR BLOKTA TOPLANDI) */
+/* 7. MOBİL AYARLAR */
 @media screen and (max-width: 768px) {
     .navbar { justify-content: center !important; height: 80px !important; }
     
-    /* Hamburger Menü Butonu */
     .menu-toggle {
         display: flex !important;
         flex-direction: column;
@@ -131,11 +127,10 @@ body {
     }
     .bar { width: 25px; height: 3px; background-color: #ffcc00; }
 
-    /* Menü Çekmecesi */
     .nav-links {
         position: fixed !important;
         top: 0 !important;
-        left: -100% !important; /* Soldan giriş */
+        left: -100% !important;
         width: 75% !important;
         height: 100vh !important;
         background-color: #002d5b !important;
@@ -148,7 +143,6 @@ body {
 
     .nav-links.active { left: 0 !important; }
 
-    /* İŞTE MENÜ DIŞINA TIKLAYINCA KAPANMAYI SAĞLAYAN SİYAH BOŞLUK */
     .nav-links.active::after {
         content: "";
         position: fixed;
@@ -156,11 +150,10 @@ body {
         width: 100vw; height: 100vh;
         background: rgba(0, 0, 0, 0.5);
         z-index: -1;
-        pointer-events: auto !important; /* Tıklamayı algılar */
+        pointer-events: auto !important;
         cursor: pointer;
     }
 
-    /* Mobilde Resimler ve Kartlar (Tekli Görünüm) */
     .slide { min-width: 100% !important; flex: 0 0 100% !important; }
     .slider-track { gap: 0 !important; }
     .kart { width: 95% !important; }
@@ -171,204 +164,18 @@ body {
 }
 
 /* 8. FORM & FOOTER */
-.form-konteynir { max-width: 800px; margin: 0 auto; background: white; padding: 40px; border-radius: 15px; }
-.input-grubu { display: flex; gap: 20px; }
-@media (max-width: 600px) { .input-grubu { flex-direction: column; } }
-
-footer { background: #001a33; color: #ffffff; padding: 50px 5% 20px; }
-.footer-kutu { display: flex; justify-content: space-between; flex-wrap: wrap; }
-
-/* --- MOBİL FORM VE FOOTER MAKYAJI --- */
-@media screen and (max-width: 768px) {
-    
-    /* 1. Teklif Al Formu Düzenlemesi */
-    .form-konteynir {
-        padding: 20px !important; /* İç boşluğu daralt */
-        width: 95% !important;
-        margin: 0 auto;
-    }
-
-    .input-grubu {
-        flex-direction: column !important; /* Ad-Soyad ve Telefonu alt alta getir */
-        gap: 10px !important;
-    }
-
-    .form-konteynir input, 
-    .form-konteynir textarea {
-        font-size: 14px !important; /* Yazıları biraz küçült */
-        padding: 12px !important;
-    }
-
-    .btn-gonder {
-        padding: 12px !important;
-        font-size: 1rem !important;
-    }
-
-    /* 2. Footer (En Alttaki Yazılar) Düzenlemesi */
-    footer {
-        padding: 40px 5% 20px !important;
-        text-align: center; /* Yazıları ortala, mobilde daha şık durur */
-    }
-
-    .footer-kutu {
-        flex-direction: column !important; /* Sütunları alt alta diz */
-        gap: 25px !important;
-    }
-
-    .footer-sutun {
-        width: 100% !important;
-    }
-
-    .footer-sutun h3, .footer-sutun h4 {
-        margin-bottom: 10px !important;
-        font-size: 1.2rem !important;
-    }
-
-    .footer-sutun p {
-        font-size: 0.9rem !important;
-        line-height: 1.4 !important;
-        margin-bottom: 8px !important;
-    }
-
-    .sosyal-medya {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .copyright {
-        font-size: 0.8rem !important;
-        margin-top: 20px !important;
-        padding-top: 15px !important;
-    }
-}
-/* --- RESİM BÜYÜTME (MODAL) MOBİL AYARI --- */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 12000 !important; /* Menüden bile üstte dursun */
-    left: 0; top: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.9);
-    justify-content: center; /* Resmi yatayda ortala */
-    align-items: center;     /* Resmi dikeyde ortala */
-}
-
-.modal-icerik {
-    max-width: 90%;
-    max-height: 85vh;
-    border: 3px solid white;
-    border-radius: 10px;
-    object-fit: contain;
-    animation: zoom 0.3s;
-}
-
-@keyframes zoom {
-    from {transform: scale(0)} 
-    to {transform: scale(1)}
-}
-
-/* --- MOBİL MENÜ VE DIŞARI TIKLAMA DÜZELTME --- */
-@media screen and (max-width: 768px) {
-    /* Menü açıldığında oluşan siyahlık tıklamayı geçirmeli */
-    .nav-links.active::after {
-        content: "";
-        position: fixed;
-        top: 0; left: 0;
-        width: 100vw; height: 100vh;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
-        pointer-events: auto !important; /* Dokunmayı algıla */
-        cursor: pointer;
-    }
-
-    .modal-icerik {
-        max-width: 95%;
-        border-width: 2px;
-    }
-
-    .kapat {
-        font-size: 50px;
-        top: 10px; right: 20px;
-    }
-}
-/* --- TEKLİF AL FORMU KESİN DÜZELTME --- */
-.form-konteynir {
-    max-width: 800px;
-    margin: 0 auto;
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
+.form-konteynir { 
+    max-width: 800px; 
+    margin: 0 auto; 
+    background: white; 
+    padding: 40px; 
+    border-radius: 15px; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.input-grubu {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-}
+.form-konteynir h2 { color: #002d5b; margin-bottom: 25px; font-size: 2rem; text-align: center; }
 
-.form-konteynir input, 
-.form-konteynir textarea {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    outline: none;
-    transition: 0.3s;
-}
-
-/* Mobilde Formun Bozulmasını Önleyen Kısım */
-@media screen and (max-width: 768px) {
-    .form-bolumu {
-        padding: 40px 5% !important;
-    }
-    
-    .form-konteynir {
-        padding: 20px !important;
-        width: 100% !important;
-    }
-
-    .input-grubu {
-        flex-direction: column !important; /* Kutuları alt alta dizer, taşmayı önler */
-        gap: 15px !important;
-        margin-bottom: 15px !important;
-    }
-
-    .btn-gonder {
-        padding: 12px !important;
-        font-size: 1rem !important;
-    }
-}
-/* --- TEKLİF AL FORMU KESİN DÜZELTME --- */
-.form-bolumu {
-    padding: 60px 5%;
-    background-color: #f4f7f6;
-    text-align: center;
-}
-
-.form-konteynir {
-    max-width: 800px;
-    margin: 0 auto;
-    background: white;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.form-konteynir h2 {
-    color: #002d5b;
-    margin-bottom: 25px;
-    font-size: 2rem;
-}
-
-/* Yan yana duran isim ve telefon kutuları */
-.input-grubu {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 20px;
-}
+.input-grubu { display: flex; gap: 20px; margin-bottom: 20px; }
 
 .form-konteynir input, 
 .form-konteynir textarea {
@@ -388,12 +195,6 @@ footer { background: #001a33; color: #ffffff; padding: 50px 5% 20px; }
     box-shadow: 0 0 5px rgba(0,45,91,0.2);
 }
 
-.form-konteynir textarea {
-    height: 120px;
-    resize: vertical;
-    margin-bottom: 20px;
-}
-
 .btn-gonder {
     background-color: #ffcc00;
     color: #002d5b;
@@ -407,26 +208,53 @@ footer { background: #001a33; color: #ffffff; padding: 50px 5% 20px; }
     transition: 0.3s;
 }
 
-.btn-gonder:hover {
-    background-color: #e6b800;
-    transform: translateY(-2px);
+.btn-gonder:hover { background-color: #e6b800; transform: translateY(-2px); }
+
+footer { background: #001a33; color: #ffffff; padding: 50px 5% 20px; }
+.footer-kutu { display: flex; justify-content: space-between; flex-wrap: wrap; }
+
+/* MOBİL FORM VE FOOTER DÜZENİ */
+@media screen and (max-width: 768px) {
+    .form-konteynir { padding: 20px !important; width: 95% !important; }
+    .input-grubu { flex-direction: column !important; gap: 10px !important; }
+    footer { text-align: center; }
+    .footer-kutu { flex-direction: column !important; gap: 25px !important; }
+    .sosyal-medya { justify-content: center; display: flex; gap: 10px; }
 }
 
-/* MOBİL UYUMLULUK */
-@media screen and (max-width: 768px) {
-    .input-grubu {
-        flex-direction: column; /* Mobilde kutuları alt alta getirir */
-        gap: 15px;
-    }
-    
-    .form-konteynir {
-        padding: 25px 20px;
-    }
-    
-    .form-konteynir h2 {
-        font-size: 1.6rem;
-    }
+/* 9. RESİM BÜYÜTME (MODAL) */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 12000 !important;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
 }
+
+.modal-icerik {
+    max-width: 90%;
+    max-height: 85vh;
+    border: 3px solid white;
+    border-radius: 10px;
+    object-fit: contain;
+    animation: zoom 0.3s;
+}
+
+@keyframes zoom { from {transform: scale(0)} to {transform: scale(1)} }
+
+.kapat {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 /* MODAL GEÇİŞ BUTONLARI */
 .modal-nav {
     position: absolute;
@@ -447,12 +275,3 @@ footer { background: #001a33; color: #ffffff; padding: 50px 5% 20px; }
 .modal-nav:hover { background: rgba(255, 255, 255, 0.5); }
 .modal-prev { left: 10px; }
 .modal-next { right: 10px; }
-
-/* Sayfa zıplamasını engelleyen kritik sınıf */
-.no-scroll {
-    position: fixed;
-    overflow-y: scroll;
-    width: 100%;
-}
-
-
