@@ -137,7 +137,42 @@
         }
         window.scrollTo(0, 0);
 
-        // --- 1. SAYAÇ SİSTEMİ ---
+        const menu = document.querySelector('#mobile-menu');
+        const menuLinks = document.querySelector('#nav-list');
+        const body = document.querySelector('body');
+
+        // --- 1. MOBİL MENÜ SİSTEMİ (GARANTİLİ KAPATMA) ---
+        if (menu && menuLinks) {
+            menu.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+                menuLinks.classList.toggle('active');
+                menu.classList.toggle('is-active');
+                body.classList.toggle('no-scroll');
+            });
+
+            // Ekranda herhangi bir yere dokunulduğunda çalışır
+            document.addEventListener('click', (e) => {
+                const isMenuOpen = menuLinks.classList.contains('active');
+                
+                // Menü açıksa ve tıklanan yer menü kutusu veya buton değilse KAPAT
+                if (isMenuOpen && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
+                    menuLinks.classList.remove('active');
+                    menu.classList.remove('is-active');
+                    body.classList.remove('no-scroll');
+                }
+            });
+
+            // Linklere basınca menüyü kapat
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuLinks.classList.remove('active');
+                    menu.classList.remove('is-active');
+                    body.classList.remove('no-scroll');
+                });
+            });
+        }
+
+        // --- 2. SAYAÇ SİSTEMİ ---
         const baslatSayac = () => {
             const sayilar = document.querySelectorAll('.sayi');
             sayilar.forEach(sayi => {
@@ -152,43 +187,10 @@
                         sayi.innerText = hedef + "+"; 
                     }
                 };
-                // Sayfa tam oturana kadar 300ms bekletip sonra başlatıyoruz
                 setTimeout(guncelle, 300);
             });
         };
         baslatSayac();
-
-        // --- 2. MOBİL MENÜ SİSTEMİ (DIŞARI TIKLAMA GARANTİLİ) ---
-        const menu = document.querySelector('#mobile-menu');
-        const menuLinks = document.querySelector('#nav-list');
-        const body = document.querySelector('body');
-
-        if (menu && menuLinks) {
-            menu.addEventListener('click', (e) => {
-                e.stopPropagation(); 
-                menuLinks.classList.toggle('active');
-                menu.classList.toggle('is-active');
-                body.classList.toggle('no-scroll');
-            });
-
-            // Menü dışındaki boşluğa dokunulduğunda kapatma (Kritik kısım)
-            document.addEventListener('click', (e) => {
-                const isMenuOpen = menuLinks.classList.contains('active');
-                if (isMenuOpen && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
-                    menuLinks.classList.remove('active');
-                    menu.classList.remove('is-active');
-                    body.classList.remove('no-scroll');
-                }
-            });
-
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', () => {
-                    menuLinks.classList.remove('active');
-                    menu.classList.remove('is-active');
-                    body.classList.remove('no-scroll');
-                });
-            });
-        }
 
         // --- 3. SLIDER SİSTEMİ ---
         let currentIdx = 0;
@@ -271,6 +273,7 @@
 </script>
 </body>
 </html>
+
 
 
 
