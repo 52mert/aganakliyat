@@ -169,20 +169,38 @@
         }
         form.addEventListener("submit", handleSubmit)
 
-        // --- MOBİL MENÜ ---
-        const menu = document.querySelector('#mobile-menu');
-        const menuLinks = document.querySelector('#nav-list');
-        menu.addEventListener('click', () => {
-            menuLinks.classList.toggle('active');
-            menu.classList.toggle('is-active');
-        });
+        // --- GELİŞMİŞ MOBİL MENÜ ---
+const menu = document.querySelector('#mobile-menu');
+const menuLinks = document.querySelector('#nav-list');
+const body = document.querySelector('body');
 
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                menuLinks.classList.remove('active');
-                menu.classList.remove('is-active');
-            });
-        });
+// Menü butonuna (hamburger) basınca aç/kapat
+menu.addEventListener('click', (e) => {
+    e.stopPropagation(); // Tıklamanın sayfaya yayılmasını engeller
+    menuLinks.classList.toggle('active');
+    menu.classList.toggle('is-active');
+    body.classList.toggle('no-scroll'); // Menü açıkken arka taraf kaymaz
+});
+
+// Menü dışındaki herhangi bir yere basınca kapat
+document.addEventListener('click', (e) => {
+    // Menü açıksa ve tıklanan yer menü kutusu veya buton değilse kapat
+    if (menuLinks.classList.contains('active') && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
+        menuLinks.classList.remove('active');
+        menu.classList.remove('is-active');
+        body.classList.remove('no-scroll');
+    }
+});
+
+// Linklerden birine basınca menüyü kapat
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        menuLinks.classList.remove('active');
+        menu.classList.remove('is-active');
+        body.classList.remove('no-scroll');
+    });
+});
+      
 
         // --- SAYAÇ ---
         const sayilar = document.querySelectorAll('.sayi');
@@ -272,3 +290,4 @@
     </script>
 </body>
 </html>
+
