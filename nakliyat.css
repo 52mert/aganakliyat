@@ -942,4 +942,50 @@ footer {
         width: 30px !important;
         height: 30px !important;
     }
+
+}
+
+/* --- WHATSAPP LOGO TAM ORTALAMA (KESİN ÇÖZÜM) --- */
+.whatsapp-fixed {
+    position: fixed !important;
+    bottom: 20px !important;
+    right: 20px !important;
+    width: 60px !important;
+    height: 60px !important;
+    background-color: #25d366 !important;
+    border-radius: 50% !important;
+    
+    /* Bu üçlü içindeki her şeyi tam ortaya çiviler */
+    display: flex !important;
+    justify-content: center !important; 
+    align-items: center !important;     
+    
+    padding: 0 !important; /* Kaymaya sebep olan boşlukları sıfırlar */
+    margin: 0 !important;
+    z-index: 10001 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+    animation: titret 2s infinite !important;
+    text-decoration: none !important;
+}
+
+.whatsapp-fixed svg {
+    width: 35px !important;
+    height: 35px !important;
+    display: block !important;
+    /* SVG'nin kendi içinde payı varsa onu nötrler */
+    transform: translate(0, 0) !important; 
+}
+
+/* Mobilde Boyut Ayarı */
+@media screen and (max-width: 768px) {
+    .whatsapp-fixed {
+        width: 50px !important;
+        height: 50px !important;
+        bottom: 15px !important;
+        right: 15px !important;
+    }
+    .whatsapp-fixed svg {
+        width: 28px !important;
+        height: 28px !important;
+    }
 }
