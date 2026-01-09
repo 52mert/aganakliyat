@@ -131,6 +131,12 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- 0. SAYFAYI EN ÜSTE ZORLA (YENİ) ---
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
         // --- 1. SAYAÇ SİSTEMİ ---
         const baslatSayac = () => {
             const sayilar = document.querySelectorAll('.sayi');
@@ -146,7 +152,8 @@
                         sayi.innerText = hedef + "+"; 
                     }
                 };
-                guncelle();
+                // Sayfa yüklenir yüklenmez sayaçların çalışması için 300ms bekletiyoruz
+                setTimeout(guncelle, 300);
             });
         };
         baslatSayac();
@@ -164,7 +171,6 @@
                 body.classList.toggle('no-scroll');
             });
 
-            // Menü dışındaki boşluğa dokunulduğunda kapatma
             document.addEventListener('click', (e) => {
                 const isMenuOpen = menuLinks.classList.contains('active');
                 if (isMenuOpen && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
@@ -264,6 +270,7 @@
 </script>
 </body>
 </html>
+
 
 
 
