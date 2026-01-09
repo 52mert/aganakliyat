@@ -123,11 +123,14 @@
         </svg>
     </a>
 
-    <div id="resimModal" class="modal">
-        <span class="kapat" onclick="modalKapat()">&times;</span>
-        <img class="modal-icerik" id="buyukResim">
-    </div>
-
+  <div id="resimModal" class="modal">
+    <span class="kapat" onclick="modalKapat()">&times;</span>
+    
+    <button class="modal-nav modal-prev" onclick="oncekiResim(event)">&#10094;</button>
+    <button class="modal-nav modal-next" onclick="sonrakiResim(event)">&#10095;</button>
+    
+    <img class="modal-icerik" id="buyukResim">
+</div>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -313,6 +316,7 @@
 </script>
 </body>
 </html>
+
 
 
 
