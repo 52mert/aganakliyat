@@ -177,3 +177,68 @@ body {
 
 footer { background: #001a33; color: #ffffff; padding: 50px 5% 20px; }
 .footer-kutu { display: flex; justify-content: space-between; flex-wrap: wrap; }
+
+/* --- MOBİL FORM VE FOOTER MAKYAJI --- */
+@media screen and (max-width: 768px) {
+    
+    /* 1. Teklif Al Formu Düzenlemesi */
+    .form-konteynir {
+        padding: 20px !important; /* İç boşluğu daralt */
+        width: 95% !important;
+        margin: 0 auto;
+    }
+
+    .input-grubu {
+        flex-direction: column !important; /* Ad-Soyad ve Telefonu alt alta getir */
+        gap: 10px !important;
+    }
+
+    .form-konteynir input, 
+    .form-konteynir textarea {
+        font-size: 14px !important; /* Yazıları biraz küçült */
+        padding: 12px !important;
+    }
+
+    .btn-gonder {
+        padding: 12px !important;
+        font-size: 1rem !important;
+    }
+
+    /* 2. Footer (En Alttaki Yazılar) Düzenlemesi */
+    footer {
+        padding: 40px 5% 20px !important;
+        text-align: center; /* Yazıları ortala, mobilde daha şık durur */
+    }
+
+    .footer-kutu {
+        flex-direction: column !important; /* Sütunları alt alta diz */
+        gap: 25px !important;
+    }
+
+    .footer-sutun {
+        width: 100% !important;
+    }
+
+    .footer-sutun h3, .footer-sutun h4 {
+        margin-bottom: 10px !important;
+        font-size: 1.2rem !important;
+    }
+
+    .footer-sutun p {
+        font-size: 0.9rem !important;
+        line-height: 1.4 !important;
+        margin-bottom: 8px !important;
+    }
+
+    .sosyal-medya {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .copyright {
+        font-size: 0.8rem !important;
+        margin-top: 20px !important;
+        padding-top: 15px !important;
+    }
+}
