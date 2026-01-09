@@ -427,5 +427,32 @@ footer { background: #001a33; color: #ffffff; padding: 50px 5% 20px; }
         font-size: 1.6rem;
     }
 }
+/* MODAL GEÇİŞ BUTONLARI */
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 30px;
+    padding: 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    transition: 0.3s;
+    user-select: none;
+    z-index: 12005;
+}
+
+.modal-nav:hover { background: rgba(255, 255, 255, 0.5); }
+.modal-prev { left: 10px; }
+.modal-next { right: 10px; }
+
+/* Sayfa zıplamasını engelleyen kritik sınıf */
+.no-scroll {
+    position: fixed;
+    overflow-y: scroll;
+    width: 100%;
+}
 
 
