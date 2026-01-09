@@ -403,3 +403,16 @@ footer {
     .whatsapp-fixed { width: 50px !important; height: 50px !important; }
     .whatsapp-fixed svg { width: 28px !important; height: 28px !important; }
 }
+/* RESİMLERİN ORANTISINI KORUMA */
+.kart img, .slide img {
+    width: 100% !important;
+    height: 250px !important; /* Yüksekliği sabitledik */
+    object-fit: cover !important; /* Resmi bozmadan kutuya doldurur */
+    object-position: center !important; /* Resmin merkezine odaklanır */
+}
+
+@media screen and (max-width: 768px) {
+    .kart img, .slide img {
+        height: 200px !important; /* Mobilde biraz daha küçük ve kibar dursun */
+    }
+}
