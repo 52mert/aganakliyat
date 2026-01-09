@@ -466,5 +466,20 @@ html, body {
         cursor: pointer;
     }
 }
+/* DIŞARI TIKLAMAYI AKTİF EDEN KESİN ÇÖZÜM */
+@media screen and (max-width: 768px) {
+    .nav-links.active::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5); /* Siyah karartma */
+        z-index: -1; /* Menünün bir tık arkası */
+        pointer-events: auto !important; /* İŞTE BU SATIR TIKLAMAYI SAĞLAR */
+        cursor: pointer;
+    }
+}
 
 
