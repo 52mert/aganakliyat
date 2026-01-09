@@ -131,7 +131,7 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- 0. SAYFAYI EN ÜSTE ZORLA (YENİ) ---
+        // --- 0. SAYFAYI EN ÜSTE ZORLA VE ZIPLAMAYI ENGELLE ---
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
@@ -152,13 +152,13 @@
                         sayi.innerText = hedef + "+"; 
                     }
                 };
-                // Sayfa yüklenir yüklenmez sayaçların çalışması için 300ms bekletiyoruz
+                // Sayfa tam oturana kadar 300ms bekletip sonra başlatıyoruz
                 setTimeout(guncelle, 300);
             });
         };
         baslatSayac();
 
-        // --- 2. MOBİL MENÜ SİSTEMİ (KESİN ÇÖZÜM) ---
+        // --- 2. MOBİL MENÜ SİSTEMİ (DIŞARI TIKLAMA GARANTİLİ) ---
         const menu = document.querySelector('#mobile-menu');
         const menuLinks = document.querySelector('#nav-list');
         const body = document.querySelector('body');
@@ -171,6 +171,7 @@
                 body.classList.toggle('no-scroll');
             });
 
+            // Menü dışındaki boşluğa dokunulduğunda kapatma (Kritik kısım)
             document.addEventListener('click', (e) => {
                 const isMenuOpen = menuLinks.classList.contains('active');
                 if (isMenuOpen && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
@@ -270,6 +271,7 @@
 </script>
 </body>
 </html>
+
 
 
 
