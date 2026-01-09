@@ -153,8 +153,6 @@
             // Ekranda herhangi bir yere dokunulduğunda çalışır
             document.addEventListener('click', (e) => {
                 const isMenuOpen = menuLinks.classList.contains('active');
-                
-                // Menü açıksa ve tıklanan yer menü kutusu veya buton değilse KAPAT
                 if (isMenuOpen && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
                     menuLinks.classList.remove('active');
                     menu.classList.remove('is-active');
@@ -162,7 +160,6 @@
                 }
             });
 
-            // Linklere basınca menüyü kapat
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     menuLinks.classList.remove('active');
@@ -244,18 +241,35 @@
             });
         }
 
-        // --- 5. MODAL & PARTICLES ---
+        // --- 5. MODAL (RESİM BÜYÜTME - MOBİL UYUMLU) ---
         const modal = document.getElementById("resimModal");
         const modalImg = document.getElementById("buyukResim");
-        document.querySelectorAll('.slide img').forEach(resim => {
+        
+        // Sadece slider değil, kartlardaki resimlere de tıklama ekledik
+        document.querySelectorAll('.slide img, .kart img').forEach(resim => {
+            resim.style.cursor = "pointer";
             resim.onclick = function() {
-                if(modal && modalImg) { modal.style.display = "block"; modalImg.src = this.src; }
+                if(modal && modalImg) { 
+                    modal.style.display = "flex"; // "block" yerine "flex" yaparak tam ortalıyoruz
+                    modalImg.src = this.src; 
+                    body.classList.add('no-scroll');
+                }
             }
         });
 
-        window.modalKapat = function() { if(modal) modal.style.display = "none"; }
-        window.onclick = function(event) { if (event.target == modal) modal.style.display = "none"; }
+        window.modalKapat = function() { 
+            if(modal) {
+                modal.style.display = "none"; 
+                body.classList.remove('no-scroll');
+            }
+        }
+        
+        // Resim açıkken dışına basınca kapat
+        window.onclick = function(event) { 
+            if (event.target == modal) { modalKapat(); } 
+        }
 
+        // --- PARTICLES ---
         if(window.particlesJS) {
             particlesJS("particles-js", {
                 "particles": {
@@ -273,6 +287,7 @@
 </script>
 </body>
 </html>
+
 
 
 
