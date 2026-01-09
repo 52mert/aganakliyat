@@ -416,3 +416,22 @@ footer {
         height: 200px !important; /* Mobilde biraz daha küçük ve kibar dursun */
     }
 }
+/* RESİMLERİN ORANTISINI KORU VE EN ÜSTTEN BAŞLATMA AYARI */
+html, body {
+    scroll-behavior: smooth !important;
+}
+
+/* Kartlardaki ve Sliderdaki resimlerin bozulmasını önler */
+.kart img, .slide img {
+    width: 100% !important;
+    height: 250px !important; /* Yüksekliği sabitle */
+    object-fit: cover !important; /* Resmi kutuya sığacak şekilde kırp (bozmaz) */
+    object-position: center !important;
+}
+
+@media screen and (max-width: 768px) {
+    .kart img, .slide img {
+        height: 200px !important; /* Mobilde biraz daha küçük olsun */
+    }
+}
+
