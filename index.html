@@ -129,7 +129,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-   <script>
+<script>
     // --- FORM GÖNDERME (SAYFA YENİLEMEDEN) ---
     var form = document.getElementById("my-form");
 
@@ -169,7 +169,7 @@
     }
     form.addEventListener("submit", handleSubmit)
 
-    // --- MOBİL MENÜ (DIŞARI TIKLAMA ÖZELLİĞİ EKLENDİ) ---
+    // --- MOBİL MENÜ (DIŞARI TIKLAMA VE KAYDIRMA ÖZELLİĞİ) ---
     const menu = document.querySelector('#mobile-menu');
     const menuLinks = document.querySelector('#nav-list');
 
@@ -178,6 +178,14 @@
         menuLinks.classList.toggle('active');
         menu.classList.toggle('is-active');
     });
+
+    // Sayfa kaydırıldığında menüyü kapatır
+    window.addEventListener('scroll', () => {
+        if (menuLinks.classList.contains('active')) {
+            menuLinks.classList.remove('active');
+            menu.classList.remove('is-active');
+        }
+    }, { passive: true });
 
     // Menü dışındaki herhangi bir yere tıklandığında menüyü kapatır
     document.addEventListener('click', (e) => {
@@ -286,4 +294,5 @@
 </script>
 </body>
 </html>
+
 
