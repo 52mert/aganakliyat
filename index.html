@@ -129,9 +129,9 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
+<script>
     document.addEventListener('DOMContentLoaded', () => {
-        // --- 1. SAYAÇ SİSTEMİ (GARANTİYE ALINDI) ---
+        // --- 1. SAYAÇ SİSTEMİ ---
         const baslatSayac = () => {
             const sayilar = document.querySelectorAll('.sayi');
             sayilar.forEach(sayi => {
@@ -151,29 +151,35 @@
         };
         baslatSayac();
 
-        // --- 2. MOBİL MENÜ SİSTEMİ ---
+        // --- 2. MOBİL MENÜ SİSTEMİ (GÜNCELLENDİ) ---
         const menu = document.querySelector('#mobile-menu');
         const menuLinks = document.querySelector('#nav-list');
         const body = document.querySelector('body');
 
         if (menu && menuLinks) {
+            // Hamburger butonuna basınca aç/kapat
             menu.addEventListener('click', (e) => {
-                e.stopPropagation(); 
+                e.stopPropagation(); // Tıklamanın document'a sızmasını engeller
                 menuLinks.classList.toggle('active');
                 menu.classList.toggle('is-active');
                 body.classList.toggle('no-scroll');
             });
 
+            // DIŞARIYA DOKUNUNCA KAPANMA GARANTİSİ
             document.addEventListener('click', (e) => {
-                if (menuLinks.classList.contains('active')) {
-                    if (!menuLinks.contains(e.target) && !menu.contains(e.target)) {
-                        menuLinks.classList.remove('active');
-                        menu.classList.remove('is-active');
-                        body.classList.remove('no-scroll');
-                    }
+                const isMenuOpen = menuLinks.classList.contains('active');
+                const clickedInsideMenu = menuLinks.contains(e.target);
+                const clickedMenuBtn = menu.contains(e.target);
+
+                // Menü açıksa VE tıklanan yer menü içi veya buton değilse KAPAT
+                if (isMenuOpen && !clickedInsideMenu && !clickedMenuBtn) {
+                    menuLinks.classList.remove('active');
+                    menu.classList.remove('is-active');
+                    body.classList.remove('no-scroll');
                 }
             });
 
+            // Linklere basınca menüyü kapat
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     menuLinks.classList.remove('active');
@@ -183,7 +189,7 @@
             });
         }
 
-        // --- 3. SLIDER SİSTEMİ (HATA KONTROLLÜ) ---
+        // --- 3. SLIDER SİSTEMİ ---
         let currentIdx = 0;
         const track = document.querySelector('.slider-track');
         const slides = document.querySelectorAll('.slide');
@@ -269,6 +275,7 @@
 </script>
 </body>
 </html>
+
 
 
 
