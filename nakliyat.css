@@ -473,7 +473,7 @@ footer {
 /* 2. Mouse üzerine geldiğinde (Hover durumu) */
 .nav-links a:hover {
     color: #ffcc00; /* İstediğin o sarı tona döner */
-    transform: scale(1.15); /* Linki %15 oranında büyütür */
+    transform: scale(1.2)  translateY(-5px); /* Linki %15 oranında büyütür */
     text-shadow: 0 0 10px rgba(255, 204, 0, 0.4); /* Yazının arkasına hafif bir parlama verir */
 }
 
@@ -991,3 +991,4 @@ footer {
         height: 28px !important;
     }
 }
+
