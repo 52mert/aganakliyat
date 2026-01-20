@@ -1809,3 +1809,49 @@ footer {
         z-index: 2100 !important;
     }
 }
+
+/* --- MOBİL MENÜ YAZI HİZALAMA NİHAİ ÇÖZÜM --- */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none !important; /* Kapalıyken gizli */
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important;
+        width: 100vw !important; /* Ekran genişliğini tam kapla */
+        height: 100vh !important;
+        background: #002d5b !important; /* Şeffaflığı kaldırdık, yazılar netleşsin */
+        
+        /* MERKEZLEME AYARLARI */
+        flex-direction: column !important;
+        justify-content: center !important; /* Dikeyde orta */
+        align-items: center !important;    /* Yatayda orta */
+        
+        padding: 0 !important; /* Sola iten tüm boşlukları sıfırla */
+        margin: 0 !important;
+        transition: 0.4s ease-in-out !important;
+        z-index: 9999 !important;
+    }
+
+    /* Menü Açıldığında */
+    .nav-links.active {
+        display: flex !important;
+        left: 0 !important;
+    }
+
+    .nav-links li {
+        width: 100% !important; /* Satırı tam kaplasın */
+        text-align: center !important; /* Yazıyı kendi içinde ortala */
+        margin: 20px 0 !important;
+        padding: 0 !important;
+    }
+
+    .nav-links a {
+        font-size: 1.8rem !important;
+        color: #ffffff !important;
+        font-weight: 900 !important;
+        text-decoration: none !important;
+        display: block !important;
+        width: 100% !important;
+    }
+}
+
