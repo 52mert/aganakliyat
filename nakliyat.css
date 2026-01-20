@@ -1058,5 +1058,65 @@ footer {
     margin-top: 10px;
 }
 
+/* SAYAÇ ALANINI MOBİLE UYARLA */
+.sayac-alani {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px 5%;
+    background: white;
+    flex-wrap: wrap;
+}
+
+.sayac-kutu {
+    text-align: center;
+    min-width: 120px;
+    padding: 20px;
+}
+
+.sayac-kutu .sayi {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #002d5b;
+    margin-bottom: 10px;
+}
+
+.sayac-kutu p {
+    font-size: 0.9rem;
+    color: #555;
+    font-weight: 500;
+}
+
+/* MOBİLDE TEK SÜTUN OLSUN */
+@media screen and (max-width: 768px) {
+    .sayac-alani {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        padding: 40px 20px;
+    }
+    
+    .sayac-kutu {
+        width: 100%;
+        max-width: 250px;
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 25px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .sayac-kutu .sayi {
+        font-size: 3rem;
+        color: #ffcc00;
+        text-shadow: 2px 2px 0 #002d5b;
+    }
+    
+    .sayac-kutu p {
+        font-size: 1rem;
+        color: #002d5b;
+        font-weight: 600;
+    }
+}
 
 
