@@ -1971,3 +1971,86 @@ footer {
     }
 }
 
+
+
+/* --- MOBİL NİHAİ TEMİZLİK VE HİZALAMA --- */
+@media screen and (max-width: 768px) {
+    /* 1. Navbar'ı Yeniden Düzenle */
+    .navbar {
+        display: flex !important;
+        justify-content: center !important; /* Logoyu ortalamak için */
+        align-items: center !important;
+        height: 80px !important;
+        position: relative !important;
+        padding: 0 !important;
+    }
+
+    /* 2. Logo Üstte ve Ortada */
+    .logo {
+        margin: 0 auto !important;
+        position: relative !important;
+        z-index: 10 !important;
+    }
+
+    /* 3. Menü Butonu (Hamburger) En Sola Sabitle */
+    .menu-toggle {
+        display: flex !important;
+        position: absolute !important;
+        left: 20px !important; /* Sol tarafa aldık */
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 10001 !important;
+    }
+
+    /* 4. Menü Çekmecesi (Yazıların Olduğu Yer) */
+    .nav-links {
+        display: none !important; 
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important; 
+        width: 100vw !important; /* Ekranı tam kapla */
+        height: 100vh !important;
+        background: #002d5b !important; /* Lacivert zemin */
+        
+        /* YAZILARI ORTALAYAN ASIL KISIM */
+        flex-direction: column !important;
+        justify-content: center !important; /* Dikeyde orta */
+        align-items: center !important;    /* Yatayda orta */
+        
+        margin: 0 !important;
+        padding: 0 !important;
+        transition: 0.4s ease-in-out !important;
+        z-index: 10000 !important;
+    }
+
+    /* Menü Açıldığında Sola Yasla (Soldan İçeri Girer) */
+    .nav-links.active {
+        display: flex !important;
+        left: 0 !important;
+    }
+
+    /* 5. Yazıların Kendisi */
+    .nav-links li {
+        width: 100% !important;
+        margin: 15px 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    .nav-links a {
+        font-size: 1.8rem !important;
+        color: #ffffff !important;
+        font-weight: 900 !important;
+        text-align: center !important;
+        display: block !important;
+        width: 100% !important;
+        padding: 10px 0 !important;
+    }
+
+    /* PC'den kalan sağdaki butonu mobilde gizle (karmaşayı önler) */
+    .nav-call-btn {
+        display: none !important;
+    }
+}
