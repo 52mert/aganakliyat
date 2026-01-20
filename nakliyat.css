@@ -1173,5 +1173,46 @@ footer {
         line-height: 1.3;
     }
 }
+/* MOBİLDE SAYAÇ TAŞMASINI ÖNLE */
+@media screen and (max-width: 768px) {
+    .sayac-alani {
+        flex-direction: row !important;
+        gap: 15px !important; /* Boşluğu azalt */
+        padding: 50px 10px !important;
+        justify-content: space-between !important;
+    }
+    
+    .sayac-kutu {
+        min-width: 80px !important; /* Genişliği azalt */
+        max-width: 100px !important;
+        flex: 1 !important;
+        padding: 10px 5px !important;
+    }
+    
+    .sayac-kutu .sayi {
+        font-size: 1.8rem !important; /* Sayıyı küçült */
+        color: #002d5b !important;
+        white-space: nowrap !important;
+    }
+    
+    .sayac-kutu p {
+        font-size: 0.75rem !important;
+        color: #555555 !important;
+        line-height: 1.2 !important;
+        word-break: break-word !important; /* Uzun kelimeleri böl */
+    }
+}
+
+/* Çok küçük ekranlar için (360px altı) */
+@media screen and (max-width: 400px) {
+    .sayac-kutu .sayi {
+        font-size: 1.5rem !important;
+    }
+    
+    .sayac-kutu p {
+        font-size: 0.7rem !important;
+    }
+}
+
 
 
