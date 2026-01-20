@@ -1713,5 +1713,52 @@ footer {
         z-index: 2002 !important;
     }
 }
+/* --- MOBİL MENÜ YAZI ORTALAMA VE GÖRÜNÜRLÜK --- */
+@media screen and (max-width: 768px) {
+    /* Menü açıldığında linkleri taşıyan ana kutu */
+    .nav-links {
+        display: none !important; /* Kapalıyken gizli */
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important;
+        width: 100% !important; /* Tam ekran yapalım ki yazıların yeri kalsın */
+        height: 100vh !important;
+        background: rgba(0, 45, 91, 0.98) !important; /* Arka planı biraz daha net yaptık */
+        flex-direction: column !important;
+        justify-content: center !important; /* Dikeyde orta */
+        align-items: center !important;    /* Yatayda orta - Yazıları ortalayan sihir burada */
+        transition: 0.4s ease-in-out !important;
+        z-index: 2001 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Menü aktif olduğunda ekrana tam oturur */
+    .nav-links.active {
+        display: flex !important;
+        left: 0 !important;
+    }
+
+    /* Her bir liste elemanının genişliğini ayarla */
+    .nav-links li {
+        width: 100% !important;
+        margin: 15px 0 !important;
+        text-align: center !important;
+    }
+
+    /* Yazıların kendisi */
+    .nav-links a {
+        font-size: 1.6rem !important; /* Biraz daha büyük ve okunaklı */
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
+        display: inline-block !important; /* Link alanını daraltıp ortalar */
+    }
+
+    /* Hamburger butonunun (X işaretinin) menünün üstünde kalması için */
+    .menu-toggle {
+        z-index: 2002 !important;
+    }
+}
 
 
