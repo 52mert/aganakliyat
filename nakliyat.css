@@ -1118,5 +1118,60 @@ footer {
         font-weight: 600;
     }
 }
+/* SAYAÇ ALANINI DÜZELT (PC + MOBİL) */
+.sayac-alani {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    padding: 60px 5%;
+    background: #ffffff; /* Beyaz zemin */
+    flex-wrap: wrap;
+}
+
+.sayac-kutu {
+    text-align: center;
+    min-width: 150px;
+}
+
+.sayac-kutu .sayi {
+    display: block;
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: #002d5b !important; /* Koyu mavi (PC'deki gibi) */
+    margin-bottom: 15px;
+}
+
+.sayac-kutu p {
+    font-size: 1.1rem;
+    color: #555555 !important; /* Alt yazılar gri */
+    font-weight: 500;
+}
+
+/* MOBİLDE DÜZEN */
+@media screen and (max-width: 768px) {
+    .sayac-alani {
+        flex-direction: row !important; /* Yan yana kalsın */
+        gap: 30px;
+        padding: 50px 20px;
+        justify-content: space-around;
+    }
+    
+    .sayac-kutu {
+        min-width: 90px;
+        flex: 1;
+    }
+    
+    .sayac-kutu .sayi {
+        font-size: 2.2rem !important;
+        color: #002d5b !important; /* Mobilde de koyu mavi */
+    }
+    
+    .sayac-kutu p {
+        font-size: 0.85rem !important;
+        color: #555555 !important; /* Mobilde de gri */
+        line-height: 1.3;
+    }
+}
 
 
