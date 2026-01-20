@@ -1667,4 +1667,50 @@ footer {
         box-shadow: -5px 0 15px rgba(0,0,0,0.5) !important;
     }
 }
+/* --- MOBİL MENÜ YAZI VE HİZALAMA DÜZELTMESİ --- */
+@media screen and (max-width: 768px) {
+    /* Menü listesinin (çekmecenin) kendisi */
+    .nav-links {
+        display: none !important; /* Başlangıçta gizli */
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important; /* Soldan açılması için */
+        width: 80% !important; /* Ekranın %80'ini kaplasın */
+        height: 100vh !important;
+        background: #002d5b !important; /* Koyu lacivert (opak, şeffaf değil) */
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        transition: 0.4s ease-in-out !important;
+        z-index: 2001 !important;
+        padding: 0 !important;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.5) !important;
+    }
+
+    /* Menü aktif olduğunda içeri kayar */
+    .nav-links.active {
+        display: flex !important;
+        left: 0 !important;
+    }
+
+    /* İçerideki yazıların stili */
+    .nav-links li {
+        margin: 20px 0 !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .nav-links a {
+        font-size: 1.4rem !important; /* Yazıları mobilde büyüttük */
+        color: #ffffff !important;
+        font-weight: bold !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Hamburger butonunun (X işaretinin) üstte kalması için */
+    .menu-toggle {
+        z-index: 2002 !important;
+    }
+}
 
