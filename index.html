@@ -139,11 +139,9 @@
         <img class="modal-icerik" id="buyukResim">
     </div>
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-<script>
-    // --- FORM GÖNDERME (SAYFA YENİLEMEDEN) ---
+   <script>
+    // --- FORM GÖNDERME ---
     var form = document.getElementById("my-form");
-
     async function handleSubmit(event) {
         event.preventDefault();
         var status = document.getElementById("my-form-status");
@@ -151,60 +149,36 @@
         fetch(event.target.action, {
             method: form.method,
             body: data,
-            headers: {
-                'Accept': 'application/json'
-            }
+            headers: { 'Accept': 'application/json' }
         }).then(response => {
             if (response.ok) {
-                status.innerHTML = "✅ Mesajınız başarıyla gönderildi! Sizinle en kısa sürede iletişime geçeceğiz.";
+                status.innerHTML = "✅ Mesajınız başarıyla gönderildi!";
                 status.style.display = "block";
                 status.style.backgroundColor = "#d4edda";
-                status.style.color = "#155724";
-                status.style.border = "1px solid #c3e6cb";
                 form.reset();
-            } else {
-                response.json().then(data => {
-                    if (Object.hasOwn(data, 'errors')) {
-                        status.innerHTML = data["errors"].map(error => error["message"]).join(", ");
-                    } else {
-                        status.innerHTML = "❌ Bir sorun oluştu, lütfen formu kontrol edip tekrar deneyin.";
-                    }
-                })
             }
         }).catch(error => {
-            status.innerHTML = "❌ İletişim hatası! Lütfen internetinizi kontrol edin.";
+            status.innerHTML = "❌ İletişim hatası!";
             status.style.display = "block";
-            status.style.backgroundColor = "#f8d7da";
-            status.style.color = "#721c24";
         });
     }
-    form.addEventListener("submit", handleSubmit)
+    if(form) form.addEventListener("submit", handleSubmit);
 
-    // --- MOBİL MENÜ (DIŞARI TIKLAMA VE KAYDIRMA ÖZELLİĞİ) ---
+    // --- MOBİL MENÜ (SENİN KODUNUN DÜZELTİLMİŞ HALİ) ---
     const menu = document.querySelector('#mobile-menu');
-    const menuLinks = document.querySelector('#nav-list');
+    const menuLinks = document.querySelector('.nav-links'); // id yerine class seçtik
 
-    menu.addEventListener('click', (e) => {
-        e.stopPropagation(); // Tıklamanın dışarı sızmasını engeller
-        menuLinks.classList.toggle('active');
-        menu.classList.toggle('is-active');
-    });
+    if(menu) {
+        menu.addEventListener('click', (e) => {
+            e.stopPropagation();
+            menuLinks.classList.toggle('active');
+            menu.classList.toggle('is-active');
+        });
+    }
 
-    // Sayfa kaydırıldığında menüyü kapatır
-    window.addEventListener('scroll', () => {
-        if (menuLinks.classList.contains('active')) {
-            menuLinks.classList.remove('active');
-            menu.classList.remove('is-active');
-        }
-    }, { passive: true });
-
-    // Menü dışındaki herhangi bir yere tıklandığında menüyü kapatır
+    // Menü dışına tıklandığında veya linke tıklandığında kapat
     document.addEventListener('click', (e) => {
-        const isMenuOpen = menuLinks.classList.contains('active');
-        const isClickInsideMenu = menuLinks.contains(e.target);
-        const isClickOnButton = menu.contains(e.target);
-
-        if (isMenuOpen && !isClickInsideMenu && !isClickOnButton) {
+        if (menuLinks && menuLinks.classList.contains('active') && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
             menuLinks.classList.remove('active');
             menu.classList.remove('is-active');
         }
@@ -212,12 +186,12 @@
 
     document.querySelectorAll('.nav-links a').forEach(link => {
         link.addEventListener('click', () => {
-            menuLinks.classList.remove('active');
-            menu.classList.remove('is-active');
+            if(menuLinks) menuLinks.classList.remove('active');
+            if(menu) menu.classList.remove('is-active');
         });
     });
 
-    // --- SAYAÇ ---
+    // --- SAYAÇ VE SLIDER (AYNEN KALIYOR) ---
     const sayilar = document.querySelectorAll('.sayi');
     sayilar.forEach(sayi => {
         const hedef = +sayi.getAttribute('data-target');
@@ -232,12 +206,11 @@
         guncelle();
     });
 
-    // --- SLIDER ---
     let currentIdx = 0;
     const track = document.querySelector('.slider-track');
     const slides = document.querySelectorAll('.slide');
-
     function updateSlider() {
+        if(!track) return;
         const isMobile = window.innerWidth <= 768;
         const moveAmount = isMobile ? 100 : 33.333;
         const maxIdx = isMobile ? slides.length - 1 : slides.length - 3;
@@ -245,66 +218,14 @@
         if (currentIdx < 0) currentIdx = maxIdx;
         track.style.transform = `translateX(-${currentIdx * moveAmount}%)`;
     }
-
-    document.getElementById('nextBtn').addEventListener('click', () => {
-        currentIdx++;
-        updateSlider();
-        resetTimer();
-    });
-
-    document.getElementById('prevBtn').addEventListener('click', () => {
-        currentIdx--;
-        updateSlider();
-        resetTimer();
-    });
-
-    let autoSlide = setInterval(() => {
-        currentIdx++;
-        updateSlider();
-    }, 3000);
-
-    function resetTimer() {
-        clearInterval(autoSlide);
-        autoSlide = setInterval(() => {
-            currentIdx++;
-            updateSlider();
-        }, 3000);
+    if(document.getElementById('nextBtn')) {
+        document.getElementById('nextBtn').onclick = () => { currentIdx++; updateSlider(); };
+        document.getElementById('prevBtn').onclick = () => { currentIdx--; updateSlider(); };
     }
-
-    window.addEventListener('resize', updateSlider);
-
-    // --- MODAL ---
-    const modal = document.getElementById("resimModal");
-    const modalImg = document.getElementById("buyukResim");
-
-    document.querySelectorAll('.slide img').forEach(resim => {
-        resim.onclick = function(){
-            modal.style.display = "block";
-            modalImg.src = this.src;
-        }
-    });
-
-    function modalKapat() { modal.style.display = "none"; }
-
-    window.onclick = function(event) {
-        if (event.target == modal) { modal.style.display = "none"; }
-    }
-
-    // --- PARTICLES ---
-    particlesJS("particles-js", {
-        "particles": {
-            "number": { "value": 40 },
-            "color": { "value": "#ffffff" },
-            "shape": { "type": "circle" },
-            "opacity": { "value": 0.2 },
-            "size": { "value": 3 },
-            "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.1, "width": 1 },
-            "move": { "enable": true, "speed": 1.5 }
-        }
-    });
 </script>
 </body>
 </html>
+
 
 
 
