@@ -1639,4 +1639,32 @@ footer {
         z-index: 1500 !important;
     }
 }
+/* --- MOBİL VE RESİM NİHAİ DÜZELTME --- */
+@media screen and (max-width: 768px) {
+    .hero {
+        /* Mobilde arka planı fixed yaparsan resim kaybolur, scroll yapıyoruz */
+        background-attachment: scroll !important;
+        background-image: linear-gradient(rgba(0, 45, 91, 0.6), rgba(0, 45, 91, 0.6)), 
+                          url('./web.mp4/kamyon.jpeg') !important;
+        background-size: cover !important;
+        background-position: center center !important;
+        height: 70vh !important;
+    }
+
+    /* Menü açıldığında her şeyin üstünde ve düzgün dursun */
+    .nav-links.active {
+        display: flex !important;
+        flex-direction: column !important;
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        width: 75% !important;
+        height: 100vh !important;
+        background: rgba(0, 26, 51, 0.98) !important;
+        justify-content: center !important;
+        align-items: center !important;
+        z-index: 999 !important;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5) !important;
+    }
+}
 
