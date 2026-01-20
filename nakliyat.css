@@ -1762,3 +1762,50 @@ footer {
 }
 
 
+/* --- MOBİL MENÜ YAZI VE HİZALAMA NİHAİ DÜZELTME --- */
+@media screen and (max-width: 768px) {
+    /* Menü açıldığında gelen koyu kutu */
+    .nav-links {
+        display: none !important; /* Başlangıçta gizli kalsın */
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important; /* Kapalıyken solda gizli */
+        width: 100% !important; /* Tüm ekranı kaplasın ki hizalama şaşmasın */
+        height: 100vh !important;
+        background: rgba(0, 26, 51, 0.98) !important; /* Koyu lacivert opak arka plan */
+        flex-direction: column !important;
+        justify-content: center !important; /* Dikeyde (yukarıdan aşağı) ortalar */
+        align-items: center !important;    /* Yatayda (soldan sağa) tam ortalar */
+        transition: 0.4s ease-in-out !important;
+        z-index: 2001 !important;
+        padding: 0 !important; /* Kaymaya sebep olan iç boşlukları sıfırladık */
+        margin: 0 !important;
+    }
+
+    /* Menü aktif (açık) olduğunda */
+    .nav-links.active {
+        display: flex !important;
+        left: 0 !important; /* Ekrana tam oturur */
+    }
+
+    .nav-links li {
+        width: 100% !important; /* Satırı tam kaplasın */
+        margin: 15px 0 !important; /* Yazıların arasına nefes payı */
+        list-style: none !important;
+        text-align: center !important; /* Yazıyı kendi içinde de ortalar */
+    }
+
+    .nav-links a {
+        font-size: 1.8rem !important; /* Yazılar büyük ve net */
+        color: #ffffff !important;
+        font-weight: 800 !important;
+        text-decoration: none !important;
+        display: block !important;
+        width: 100% !important;
+    }
+
+    /* Menü butonunun (hamburger) her zaman en üstte kalması için */
+    .menu-toggle {
+        z-index: 2100 !important;
+    }
+}
