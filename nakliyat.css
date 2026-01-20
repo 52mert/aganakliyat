@@ -2399,4 +2399,46 @@ footer {
     }
 }
 
+/* --- %50 GENİŞLİK ZORLAYICI AYAR --- */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important; 
+        
+        /* GENİŞLİK AYARI */
+        width: 50% !important; 
+        max-width: 50% !important; /* Daha fazla büyümesini engeller */
+        min-width: 50% !important; /* Daha fazla küçülmesini engeller */
+        
+        height: 100vh !important;
+        background: #002d5b !important; 
+        
+        /* YAZILARI GÖRÜNÜR YAPMAK İÇİN */
+        flex-direction: column !important;
+        justify-content: center !important; 
+        align-items: flex-start !important; 
+        padding-left: 20px !important; /* Yazıların başı görünsün diye */
+        
+        margin: 0 !important;
+        transition: 0.3s ease-in-out !important;
+        z-index: 10000 !important;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.3) !important;
+    }
+
+    .nav-links.active {
+        display: flex !important;
+        left: 0 !important;
+    }
+
+    /* Yazılar %50'ye sığsın diye biraz küçültüyoruz */
+    .nav-links a {
+        font-size: 0.95rem !important; 
+        white-space: nowrap !important;
+        color: white !important;
+        font-weight: bold !important;
+    }
+}
+
 
