@@ -2351,5 +2351,52 @@ footer {
     }
 }
 
+/* --- %50 GENİŞLİK VE KESİN GÖRÜNÜR YAZILAR --- */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important; 
+        width: 50% !important; /* İstediğin gibi tam yarı ekran */
+        height: 100vh !important;
+        background: #002d5b !important; 
+        
+        /* HİZALAMA: Yazıları kutu içinde sola yasla ama içeriden it */
+        flex-direction: column !important;
+        justify-content: center !important; 
+        align-items: flex-start !important; 
+        
+        /* SOLDAKİ BOŞLUK: Yazıların başı asla kaybolmasın diye */
+        padding-left: 25px !important; 
+        margin: 0 !important;
+        transition: 0.3s ease-in-out !important;
+        z-index: 10000 !important;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.3) !important;
+    }
+
+    /* Menü Aktifken */
+    .nav-links.active {
+        display: flex !important;
+        left: 0 !important;
+    }
+
+    .nav-links li {
+        width: 100% !important;
+        margin: 15px 0 !important;
+        list-style: none !important;
+    }
+
+    .nav-links a {
+        /* Yazıların %50 genişliğe sığması için ideal boyut */
+        font-size: 1rem !important; 
+        color: #ffffff !important;
+        font-weight: 700 !important;
+        text-decoration: none !important;
+        text-transform: uppercase !important;
+        white-space: nowrap !important; /* Yazıların alt satıra düşmesini engeller */
+        display: inline-block !important;
+    }
+}
 
 
