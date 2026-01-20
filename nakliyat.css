@@ -1288,6 +1288,59 @@ footer {
     }
 }
 
+/* PC İÇİN LOGO HOVER EFEKTLERİ */
+.logo {
+    display: inline-block;
+    overflow: visible !important; /* Çizginin taşmasına izin ver */
+}
+
+.logo a {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #ffcc00 !important;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-family: 'Arial Black', sans-serif;
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s ease;
+    padding-bottom: 5px; /* Çizgi ile yazı arasına mesafe */
+}
+
+/* Alt çizgi (başlangıçta boş) */
+.logo a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0; /* Başlangıçta genişlik yok */
+    height: 3px;
+    background: #ffcc00;
+    transition: width 0.4s ease-in-out;
+    z-index: 99; /* En üstte göründüğünden emin ol */
+}
+
+/* Hover: Büyüt ve alt çizgi dolsun */
+.logo a:hover {
+    transform: scale(1.1) translateY(-3px);
+    color: #ffffff !important;
+}
+
+.logo a:hover::after {
+    width: 100%; /* Hover olunca çizgi boydan boya dolar */
+}
+
+/* Mobilde efektleri kapat */
+@media screen and (max-width: 768px) {
+    .logo a {
+        font-size: 1.3rem !important;
+        transform: none !important;
+    }
+    .logo a::after {
+        display: none !important;
+    }
+}
 
 
 
