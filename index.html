@@ -135,7 +135,7 @@
         <img class="modal-icerik" id="buyukResim">
     </div>
 
-   <script>
+    <script>
     // --- FORM GÖNDERME ---
     var form = document.getElementById("my-form");
     async function handleSubmit(event) {
@@ -160,9 +160,9 @@
     }
     if(form) form.addEventListener("submit", handleSubmit);
 
-    // --- MOBİL MENÜ (SENİN KODUNUN DÜZELTİLMİŞ HALİ) ---
+    // --- MOBİL MENÜ ---
     const menu = document.querySelector('#mobile-menu');
-    const menuLinks = document.querySelector('.nav-links'); // id yerine class seçtik
+    const menuLinks = document.querySelector('.nav-links');
 
     if(menu) {
         menu.addEventListener('click', (e) => {
@@ -172,7 +172,6 @@
         });
     }
 
-    // Menü dışına tıklandığında veya linke tıklandığında kapat
     document.addEventListener('click', (e) => {
         if (menuLinks && menuLinks.classList.contains('active') && !menuLinks.contains(e.target) && !menu.contains(e.target)) {
             menuLinks.classList.remove('active');
@@ -187,7 +186,7 @@
         });
     });
 
-    // --- SAYAÇ VE SLIDER (AYNEN KALIYOR) ---
+    // --- SAYAÇ VE SLIDER ---
     const sayilar = document.querySelectorAll('.sayi');
     sayilar.forEach(sayi => {
         const hedef = +sayi.getAttribute('data-target');
@@ -218,9 +217,38 @@
         document.getElementById('nextBtn').onclick = () => { currentIdx++; updateSlider(); };
         document.getElementById('prevBtn').onclick = () => { currentIdx--; updateSlider(); };
     }
+
+    // --- YENİ: RESİM BÜYÜTME (MODAL) FONKSİYONU ---
+    const modal = document.getElementById("resimModal");
+    const modalImg = document.getElementById("buyukResim");
+
+    // Slider içindeki resimlere tıklama özelliği ekle
+    document.querySelectorAll('.slide img').forEach(img => {
+        img.style.cursor = "zoom-in"; // Büyütülebilir olduğunu belli et
+        img.onclick = function() {
+            modal.style.display = "flex";
+            modalImg.src = this.src;
+            document.body.style.overflow = "hidden"; // Arka plan kaymasın
+        }
+    });
+
+    // Kapatma Fonksiyonu
+    function modalKapat() {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto"; // Kaydırmayı geri aç
+    }
+
+    // Dışarıya tıklayınca kapatma
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modalKapat();
+        }
+    }
 </script>
+ 
 </body>
 </html>
+
 
 
 
