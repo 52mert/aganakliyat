@@ -1236,6 +1236,57 @@ footer {
         letter-spacing: 1px;
     }
 }
+/* PC İÇİN LOGO HOVER EFEKTLERİ */
+.logo a {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #ffcc00 !important;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-family: 'Arial Black', sans-serif;
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+/* Alt çizgi (başlangıçta boş) */
+.logo a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: #ffcc00;
+    transition: width 0.4s ease;
+}
+
+/* Hover: Büyüt, yukarı çık, alt çizgi dolsun */
+.logo a:hover {
+    transform: scale(1.15) translateY(-5px);
+    color: #ffffff !important;
+}
+
+.logo a:hover::after {
+    width: 100%; /* Alt çizgi tamamen dolar */
+}
+
+/* Mobilde hover efektlerini kaldır */
+@media screen and (max-width: 768px) {
+    .logo a {
+        font-size: 1.3rem !important;
+        letter-spacing: 1px;
+    }
+    
+    .logo a:hover {
+        transform: none !important; /* Mobilde büyüme/kaydırma yok */
+    }
+    
+    .logo a::after {
+        display: none; /* Mobilde alt çizgi yok */
+    }
+}
 
 
 
