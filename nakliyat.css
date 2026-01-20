@@ -2300,4 +2300,55 @@ footer {
     }
 }
 
+/* --- MOBİL KİBAR MENÜ DÜZELTMESİ --- */
+@media screen and (max-width: 768px) {
+    .nav-links {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important; 
+        width: 40% !important; /* Ekranın %70'ini kaplasın, çok kaba durmasın */
+        height: 100vh !important;
+        background: #002d5b !important; /* Kurumsal lacivert */
+        
+        /* HİZALAMA: Yazıları kutu içinde sola ama boşluklu dizeceğiz */
+        flex-direction: column !important;
+        justify-content: center !important; 
+        align-items: flex-start !important; 
+        
+        padding-left: 40px !important; /* Yazıların başındaki o kırpılmayı önleyen boşluk */
+        margin: 0 !important;
+        transition: 0.4s ease-in-out !important;
+        z-index: 10000 !important;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.5) !important;
+    }
+
+    /* Menü Açıldığında */
+    .nav-links.active {
+        display: flex !important;
+        left: 0 !important;
+    }
+
+    .nav-links li {
+        width: 100% !important;
+        margin: 12px 0 !important; /* Yazıların arasındaki dikey mesafe */
+        padding: 0 !important;
+    }
+
+    .nav-links a {
+        font-size: 1.15rem !important; /* Yazı boyutu küçültüldü (Daha kibar) */
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        text-decoration: none !important;
+        display: inline-block !important;
+        text-transform: uppercase !important; /* Profesyonel görünüm için büyük harf */
+        letter-spacing: 1px !important;
+    }
+
+    /* Hamburger çizgilerinin rengi (Lacivert üzerinde görünmesi için sarı) */
+    .bar {
+        background-color: #ffcc00 !important;
+    }
+}
+
 
