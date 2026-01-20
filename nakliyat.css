@@ -1343,4 +1343,271 @@ footer {
 }
 
 
+/* --- ESKİ KODLARI EZEN MODERN NAVBAR --- */
+.navbar {
+    background: rgba(0, 45, 91, 0.8) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    position: fixed !important;
+    padding: 0.8rem 8% !important;
+    height: 80px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
 
+.logo a {
+    font-family: 'Arial Black', sans-serif !important;
+    color: #ffffff !important;
+    font-size: 1.6rem !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.logo a::before {
+    content: "AGA ";
+    color: #ffcc00 !important;
+    margin-right: 5px;
+}
+
+.nav-links {
+    gap: 30px !important;
+}
+
+.nav-links a {
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+    transition: 0.3s !important;
+}
+
+/* YENİ BUTON STİLİ */
+.nav-call-btn {
+    background: #ffcc00 !important;
+    color: #002d5b !important;
+    padding: 10px 22px !important;
+    border-radius: 50px !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3) !important;
+}
+
+/* Mobilde çakışma olmaması için */
+@media screen and (max-width: 768px) {
+    .nav-call-btn {
+        display: none !important;
+    }
+    .navbar {
+        height: 70px !important;
+        background: #002d5b !important; /* Mobilde şeffaflık bazen kötü durur */
+    }
+}
+/* --- RESİM VE MENÜ DÜZELTME --- */
+.hero {
+    /* Klasörün içindeyse yolu böyle yazıyoruz */
+    background-image: linear-gradient(rgba(0, 45, 91, 0.6), rgba(0, 45, 91, 0.6)), 
+                      url('web.mp4/kamyon.jpeg') !important; 
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    height: 85vh !important; /* Resmin daha iyi görünmesi için biraz büyüttük */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* NAVBAR ELEMANLARINI YAN YANA DÜZGÜN DİZ */
+.navbar {
+    display: flex !important;
+    flex-direction: row !important; /* Yan yana gelmeye zorla */
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 5% !important;
+    height: 85px !important;
+    gap: 10px !important;
+}
+
+/* Logo ve Yazı Hizasını Düzelt */
+.logo {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* Linkleri Merkeze Al ve Sıkışıklığı Gider */
+.nav-links {
+    display: flex !important;
+    flex-direction: row !important;
+    list-style: none !important;
+    gap: 20px !important; /* Linklerin arası */
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+
+/* Sağdaki Sarı Butonun Ezilmesini Engelle */
+.nav-call-btn {
+    flex-shrink: 0 !important;
+    white-space: nowrap !important;
+    padding: 10px 18px !important;
+    font-size: 0.9rem !important;
+}
+
+/* Mobilde Menü Patlamasın Diye Linkleri ve Butonu Gizle (Hamburger kalsın) */
+@media screen and (max-width: 992px) {
+    .nav-links, .nav-call-btn {
+        display: none !important;
+    }
+}
+/* --- MODERN NAVBAR DÜZELTME --- */
+.navbar {
+    display: flex !important;
+    justify-content: space-between !important; /* Elemanları iki uca fırlatır */
+    align-items: center !important;
+    background: rgba(0, 45, 91, 0.85) !important; /* Resimdeki o derin lacivert */
+    backdrop-filter: blur(12px) !important;
+    height: 85px !important;
+    padding: 0 5% !important;
+    position: fixed !important;
+    top: 0 !important;
+    width: 100% !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    z-index: 1000 !important;
+}
+
+/* Linkleri Tam Ortaya Al */
+.nav-links {
+    display: flex !important;
+    list-style: none !important;
+    gap: 30px !important; /* Linklerin arası ferah olsun */
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+.nav-links a {
+    color: white !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    font-size: 1rem !important;
+}
+
+/* Logo Stili */
+.logo a {
+    font-family: 'Arial Black', sans-serif !important;
+    font-size: 1.5rem !important;
+    color: white !important;
+}
+
+.logo a::before {
+    content: "AGA ";
+    color: #ffcc00 !important;
+}
+
+/* SAĞDAKİ BUTON (Ezilmemesi için) */
+.nav-call-btn {
+    background: #ffcc00 !important;
+    color: #002d5b !important;
+    padding: 12px 24px !important;
+    border-radius: 50px !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    white-space: nowrap !important; /* Yazı asla iki satıra bölünmez */
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.3) !important;
+    margin-left: auto !important; /* Butonu en sağa iter */
+}
+
+/* Hero Resmini ve 3D Efekti Temizleme */
+.hero {
+    background: linear-gradient(rgba(0, 45, 91, 0.5), rgba(0, 45, 91, 0.5)), 
+                url('web.mp4/kamyon.jpeg') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    height: 100vh !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding-top: 85px !important; /* Menünün altında kalmaması için */
+}
+
+/* Mobilde Menü Karmaşasını Engelle */
+@media screen and (max-width: 992px) {
+    .nav-links, .nav-call-btn {
+        display: none !important;
+    }
+    .navbar {
+        justify-content: space-between !important;
+    }
+}
+/* --- MODERN NAVBAR NİHAİ DÜZELTME --- */
+.navbar {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    background: rgba(0, 45, 91, 0.8) !important; /* Resimdeki cam efekti */
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    height: 85px !important;
+    padding: 0 5% !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    z-index: 2000 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Linkleri Tam Merkeze Almak İçin Sihirli Formül */
+.nav-links {
+    display: flex !important;
+    list-style: none !important;
+    gap: 35px !important;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+.nav-links a {
+    color: white !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    font-size: 1.05rem !important;
+    transition: 0.3s !important;
+}
+
+/* Sağdaki Sarı Buton */
+.nav-call-btn {
+    background: #ffcc00 !important;
+    color: #002d5b !important;
+    padding: 12px 22px !important;
+    border-radius: 50px !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    white-space: nowrap !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4) !important;
+    margin-left: auto !important; /* En sağa iter */
+}
+
+/* KAMYON RESMİNİ DÜZELTME */
+.hero {
+    /* Resmin klasör yoluna dikkat: web.mp4 klasörü içindeyse */
+    background: linear-gradient(rgba(0, 45, 91, 0.4), rgba(0, 45, 91, 0.4)), 
+                url('aganakliyat2.jpeg') !important;
+    background-size: cover !important;
+    background-position: center 30% !important; /* Kamyonu biraz yukarı çektik */
+    background-attachment: fixed !important;
+    height: 100vh !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding-top: 85px !important;
+}
+
+/* Mobilde Menü Patlamasın */
+@media screen and (max-width: 992px) {
+    .nav-links, .nav-call-btn {
+        display: none !important;
+    }
+}
