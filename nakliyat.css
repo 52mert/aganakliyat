@@ -1213,6 +1213,30 @@ footer {
         font-size: 0.7rem !important;
     }
 }
+.logo a {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #ffcc00 !important;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    font-family: 'Arial Black', sans-serif;
+}
+
+.logo a:hover {
+    color: #ffffff !important;
+    transform: scale(1.05);
+    transition: 0.3s;
+}
+
+/* Mobilde logoyu küçült */
+@media screen and (max-width: 768px) {
+    .logo a {
+        font-size: 1.3rem !important;
+        letter-spacing: 1px;
+    }
+}
+
 
 
 
