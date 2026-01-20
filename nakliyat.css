@@ -2400,7 +2400,7 @@ footer {
 }
 
 /* --- %50 GENİŞLİK ZORLAYICI AYAR --- */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 850px) {
     .nav-links {
         display: none !important;
         position: fixed !important;
@@ -2408,9 +2408,9 @@ footer {
         left: -100% !important; 
         
         /* GENİŞLİK AYARI */
-        width: 50% !important; 
-        max-width: 50% !important; /* Daha fazla büyümesini engeller */
-        min-width: 50% !important; /* Daha fazla küçülmesini engeller */
+        width: 800% !important; 
+        max-width: 80% !important; /* Daha fazla büyümesini engeller */
+        min-width: 80% !important; /* Daha fazla küçülmesini engeller */
         
         height: 100vh !important;
         background: #002d5b !important; 
@@ -2440,5 +2440,6 @@ footer {
         font-weight: bold !important;
     }
 }
+
 
 
