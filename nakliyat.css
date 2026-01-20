@@ -2307,7 +2307,7 @@ footer {
         position: fixed !important;
         top: 0 !important;
         left: -100% !important; 
-        width: 40% !important; /* Ekranın %70'ini kaplasın, çok kaba durmasın */
+        width: 70% !important; /* Ekranın %70'ini kaplasın, çok kaba durmasın */
         height: 100vh !important;
         background: #002d5b !important; /* Kurumsal lacivert */
         
@@ -2350,5 +2350,6 @@ footer {
         background-color: #ffcc00 !important;
     }
 }
+
 
 
