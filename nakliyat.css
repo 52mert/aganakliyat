@@ -1645,7 +1645,7 @@ footer {
         /* Mobilde arka planı fixed yaparsan resim kaybolur, scroll yapıyoruz */
         background-attachment: scroll !important;
         background-image: linear-gradient(rgba(0, 45, 91, 0.6), rgba(0, 45, 91, 0.6)), 
-                          url('./web.mp4/kamyon.jpeg') !important;
+                          url('aganakliyat2.jpeg') !important;
         background-size: cover !important;
         background-position: center center !important;
         height: 70vh !important;
@@ -1713,4 +1713,5 @@ footer {
         z-index: 2002 !important;
     }
 }
+
 
