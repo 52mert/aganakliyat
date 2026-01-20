@@ -1904,3 +1904,70 @@ footer {
     }
 }
 
+
+/* --- MOBİL MENÜ KESİN HİZALAMA --- */
+@media screen and (max-width: 768px) {
+    /* Menü çekmecesini tam ekran yapıyoruz ki kayma ihtimali kalmasın */
+    .nav-links {
+        display: none !important; /* Kapalıyken gizli */
+        position: fixed !important;
+        top: 0 !important;
+        left: -100% !important; 
+        width: 100% !important; /* Ekranın tamamını kapla */
+        height: 100vh !important;
+        background: #002d5b !important; /* Koyu lacivert zemin */
+        
+        /* Yazıları tam merkeze çivileyen komutlar */
+        flex-direction: column !important;
+        justify-content: center !important; 
+        align-items: center !important;    
+        
+        padding: 0 !important; 
+        margin: 0 !important;
+        transition: 0.4s ease-in-out !important;
+        z-index: 9998 !important; /* Navbar'ın altında, içeriğin üstünde */
+    }
+
+    /* Menü aktif olduğunda ekrana tam oturur */
+    .nav-links.active {
+        display: flex !important;
+        left: 0 !important;
+    }
+
+    /* Her bir link satırını ortala */
+    .nav-links li {
+        width: 100% !important;
+        margin: 15px 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    /* Yazıların kendisi */
+    .nav-links a {
+        font-size: 1.8rem !important;
+        color: #ffffff !important;
+        font-weight: 900 !important;
+        text-align: center !important;
+        display: block !important;
+        width: auto !important;
+        border: none !important; /* Eğer varsa çerçeveyi kaldır */
+    }
+
+    /* Telefon numarası butonu mobilde normal yazı gibi görünsün (isteğe bağlı) */
+    .nav-links a[href^="tel"] {
+        border: 2px solid #ffcc00 !important;
+        padding: 10px 20px !important;
+        border-radius: 50px !important;
+        color: #ffcc00 !important;
+    }
+
+    /* Hamburger butonu her zaman en üstte görünsün */
+    .menu-toggle {
+        display: flex !important;
+        z-index: 9999 !important;
+        position: relative !important;
+    }
+}
+
