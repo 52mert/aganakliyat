@@ -102,11 +102,18 @@
             </form>
         </div>
     </section>
-<section class="sayac-alani">
-    <div class="sayac-kutu"><span class="sayi" data-target="25">0</span><p>Yıllık Tecrübe</p></div>
-    <div class="sayac-kutu"><span class="sayi" data-target="1500">0</span><p>Mutlu Müşteri</p></div>
-    <div class="sayac-kutu"><span class="sayi" data-target="81">0</span><p>Hizmet Verilen İl</p></div>
+
+    <section class="seo-bilgi-alani">
+    <div class="container">
+        <p>
+            <strong>Aga Nakliyat</strong> olarak <strong>Ordu evden eve nakliyat</strong> ve 
+            <strong>Fatsa asansörlü taşıma</strong> sektöründe, en iyi <strong>Ordu nakliye firmaları</strong> 
+            arasında yer alarak sigortalı ve profesyonel taşımacılık hizmeti sunuyoruz. 
+            Eşyalarınız bizimle Türkiye'nin her yerine güvenle taşınır.
+        </p>
+    </div>
 </section>
+    
     <footer id="iletisim">
         <div class="footer-kutu">
             <div class="footer-sutun">
@@ -194,20 +201,7 @@
         });
     });
 
-    // --- SAYAÇ VE SLIDER ---
-    const sayilar = document.querySelectorAll('.sayi');
-    sayilar.forEach(sayi => {
-        const hedef = +sayi.getAttribute('data-target');
-        const guncelle = () => {
-            const suAnki = +sayi.innerText.replace('+', '');
-            const artis = hedef / 100;
-            if (suAnki < hedef) {
-                sayi.innerText = Math.ceil(suAnki + artis);
-                setTimeout(guncelle, 20);
-            } else { sayi.innerText = hedef + "+"; }
-        };
-        guncelle();
-    });
+  
 
     let currentIdx = 0;
     const track = document.querySelector('.slider-track');
@@ -256,6 +250,7 @@
  
 </body>
 </html>
+
 
 
 
