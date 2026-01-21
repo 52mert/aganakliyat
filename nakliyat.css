@@ -2504,4 +2504,18 @@ footer {
     font-weight: bold;
     cursor: pointer;
 }
+.seo-bilgi-alani {
+    background-color: #f4f7f6;
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 2px solid #eee;
+}
+
+.seo-bilgi-alani p {
+    font-size: 1.2rem;
+    color: #333;
+    line-height: 1.8;
+    max-width: 900px;
+    margin: 0 auto;
+}
 
