@@ -2539,3 +2539,64 @@ footer {
 @media screen and (max-width: 768px) {
     .neden-kart, .yorum-kart { width: 100% !important; }
 }
+
+/* NEDEN BİZ BÖLÜMÜNÜNÜ TAMAMEN MERKEZLE */
+.neden-biz {
+    padding: 80px 5%;
+    background: #fff;
+    text-align: center; /* Başlığı ve genel içeriği ortalar */
+}
+
+.neden-konteynir {
+    display: flex;
+    justify-content: center; /* Kartları yatayda ortalar */
+    align-items: stretch;
+    gap: 30px;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 40px auto 0 auto; /* Konteynırı sayfada ortalar */
+}
+
+.neden-kart {
+    background: #fdfdfd;
+    padding: 40px 30px;
+    border-radius: 20px;
+    width: 320px;
+    box-shadow: 0 10px 30px rgba(0, 45, 91, 0.08); /* Hafif modern gölge */
+    border-bottom: 5px solid #ffcc00;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* İçerideki ikon ve yazıları ortalar */
+}
+
+/* BAŞLIKLARI KALINLAŞTIR */
+.neden-kart h4 {
+    color: #002d5b;
+    margin: 15px 0;
+    font-size: 1.4rem;
+    font-weight: 800 !important; /* Ekstra kalınlık */
+    text-transform: uppercase;
+}
+
+/* AÇIKLAMA METİNLERİNİ DÜZENLE */
+.neden-kart p {
+    color: #444;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    font-weight: 500; /* Metni de biraz belirginleştirdik */
+    text-align: center; /* Metni kart içinde ortalar */
+}
+
+.neden-kart .ikon {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+}
+
+/* Hover Efekti (Dokunmatik hissi için önemli) */
+.neden-kart:hover {
+    transform: translateY(-10px);
+    background: #ffffff;
+    box-shadow: 0 15px 40px rgba(0, 45, 91, 0.15);
+}
+
