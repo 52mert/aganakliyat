@@ -2601,5 +2601,65 @@ footer {
 }
 
 
+/* --- MOBİL NAVİGASYON VE LOGO DÜZELTME --- */
+@media screen and (max-width: 768px) {
+    /* Navbar'ı elemanları yan yana sığacak şekilde ferahlatır */
+    .navbar {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 10px 15px !important;
+        height: 80px !important;
+    }
+
+    /* Logoyu ve metni sola hizalar, butonla arasını açar */
+    .logo {
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        flex: 1 !important;
+    }
+
+    /* Logonun kendisini yuvarlak yapar ve boyutu mobilde optimize eder */
+    .logo img {
+        width: 45px !important;
+        height: 45px !important;
+        border-radius: 50% !important; /* Daire yapar */
+        object-fit: cover !important;
+        margin: 0 !important;
+        border: 2px solid #ffffff; /* Logonun belirginleşmesi için beyaz ince çerçeve */
+    }
+
+    /* 'Hemen Ara' Butonunun logoya çarpmasını engeller */
+    .nav-call-btn {
+        display: flex !important;
+        padding: 8px 12px !important;
+        font-size: 0.85rem !important;
+        white-space: nowrap !important; /* Yazının kırılmasını önler */
+        margin-left: 10px !important;
+        border-radius: 50px !important;
+    }
+
+    /* 'AGA NAKLİYAT' yazısının mobildeki boyutunu ayarlar */
+    .logo a {
+        font-size: 1rem !important;
+        white-space: nowrap !important;
+    }
+}
+
+/* --- NEDEN BİZ BÖLÜMÜNDEKİ İKONLARI ORTALAMA --- */
+.neden-kart {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+}
+
+.neden-kart .ikon {
+    margin-bottom: 15px !important;
+    display: block !important;
+}
+
 
 
