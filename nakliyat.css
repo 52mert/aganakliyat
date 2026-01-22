@@ -2519,3 +2519,23 @@ footer {
     margin: 0 auto;
 }
 
+/* NEDEN BİZ STİLLERİ */
+.neden-biz { padding: 60px 5%; background: #fff; text-align: center; }
+.neden-konteynir { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px; }
+.neden-kart { background: #f9f9f9; padding: 30px; border-radius: 15px; width: 300px; transition: 0.3s; border-bottom: 4px solid #ffcc00; }
+.neden-kart:hover { transform: translateY(-10px); background: #eef2f7; }
+.neden-kart .ikon { font-size: 3rem; display: block; margin-bottom: 15px; }
+.neden-kart h4 { color: #002d5b; margin-bottom: 10px; font-size: 1.2rem; }
+
+/* YORUMLAR STİLLERİ */
+.yorumlar { padding: 60px 5%; background: #002d5b; color: white; text-align: center; }
+.yorumlar .bolum-basligi { color: #ffcc00; }
+.yorum-konteynir { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px; }
+.yorum-kart { background: rgba(255,255,255,0.1); padding: 25px; border-radius: 10px; width: 350px; font-style: italic; position: relative; }
+.yorum-kart::before { content: '"'; font-size: 4rem; position: absolute; top: -10px; left: 10px; color: #ffcc00; opacity: 0.3; }
+.yorum-kart h5 { margin-top: 15px; color: #ffcc00; font-size: 1rem; font-style: normal; }
+
+/* MOBİL AYARLAR */
+@media screen and (max-width: 768px) {
+    .neden-kart, .yorum-kart { width: 100% !important; }
+}
