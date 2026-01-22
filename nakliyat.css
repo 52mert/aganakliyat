@@ -2601,27 +2601,5 @@ footer {
 }
 
 
-@media screen and (max-width: 768px) {
-    .navbar {
-        height: 70px !important; /* Navbar yüksekliğini sabitle */
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        padding: 0 15px !important;
-    }
 
-    .logo img {
-        height: 40px !important; /* Mobilde logoyu biraz küçült */
-        width: 40px !important;
-        border-radius: 50% !important;
-    }
 
-    /* Menü butonunun (hamburger) logo ile çakışmasını engelle */
-    .menu-toggle {
-        order: 2 !important;
-    }
-    
-    .logo {
-        order: 1 !important;
-    }
-}
