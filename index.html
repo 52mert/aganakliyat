@@ -93,13 +93,13 @@
     <section id="iletisim-formu" class="form-bolumu">
         <div class="form-konteynir">
             <h2>Ücretsiz Teklif Alın</h2>
-            <form id="my-form" action="https://formspree.io/f/xdakqbjj" onsubmit="return formonayi(event)" method="POST">
+            <form id="my-form" action="https://formspree.io/f/xdakqbjj" onsubmit="return formonayi()" method="POST">
                 <div class="input-grubu">
                     <input type="text" name="ad-soyad" placeholder="Adınız Soyadınız" required>
                     <input type="tel" name="telefon" placeholder="5355991572" required >
                 </div>
                 <textarea name="mesaj" rows="5" placeholder="Eşyalarınız hakkında bilgi..."></textarea>
-                <button type="submit" id="my-form-button" class="btn-gonder">Teklif İste</button>
+                <button type="submit" id="my-form-button" class="btn-gonder" onsubmit="return formonayi()">Teklif İste</button>
                 <p id="my-form-status" style="margin-top: 20px; display: none; padding: 15px; border-radius: 8px; font-weight: bold;"></p>
             </form>
         </div>
@@ -197,13 +197,12 @@
     
 
     <script>
-function formonayi(event){
+function formonayi(){
 var onay2=confirm("Mesajınız Aga Nakliyat'a gönderilsin mi?");
     if(onay2){
         return true;
     }
     else{
-        event.preventDefault();
         return false;
     }
 }
@@ -351,6 +350,7 @@ function cevap(onay) {
  
 </body>
 </html>
+
 
 
 
