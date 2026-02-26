@@ -187,7 +187,50 @@
         <img class="modal-icerik" id="buyukResim">
     </div>
 
+
+<div id="ozelOnay" class="onay-kutusu">
+    <p>🚚 Eşyalarınızı nasıl taşıyoruz? Güncel nakliyat işlerimizi Instagram'da incelemek ister misiniz?</p>
+    <div class="buton-grubu">
+        <button onclick="cevap(true)" class="evet">İncele</button>
+        <button onclick="cevap(false)" class="hayir">Kapat</button>
+    </div>
+</div>
+    
+
     <script>
+
+
+
+        window.onload = function() {
+    // Sayfa açıldıktan 5 saniye sonra kutuyu göster
+    setTimeout(function() {
+        var kutu = document.querySelector("#ozelOnay");
+        
+        if(kutu) {
+            kutu.classList.add("aktif");
+
+            // Kutu açıldıktan 5 saniye sonra kullanıcı işlem yapmazsa otomatik kapat
+            setTimeout(function() {
+                if(kutu.classList.contains("aktif")) {
+                    kutu.classList.remove("aktif");
+                }
+            }, 5000); 
+        }
+    }, 5000);
+};
+
+// Butonlara tıklandığında çalışacak fonksiyon
+function cevap(onay) {
+    var kutu = document.querySelector("#ozelOnay");
+    kutu.classList.remove("aktif");
+
+    if (onay) {
+        // Instagram sayfasını yeni sekmede açar
+        window.open("https://www.instagram.com/aganakliyat52/", "_blank");
+    }
+}
+
+        
     // --- FORM GÖNDERME ---
     var form = document.getElementById("my-form");
     async function handleSubmit(event) {
@@ -287,6 +330,7 @@
  
 </body>
 </html>
+
 
 
 
