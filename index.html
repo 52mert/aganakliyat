@@ -197,6 +197,15 @@
     
 
     <script>
+document.addEventListener("click",function(event){
+var pop=document.getElementById("ozelOnay");
+    if(event.target==pop)
+        document.getElementById("ozelOnay").style.display="none";
+    
+});
+        
+
+        
 function formonayi(){
 var onay2=confirm("Mesajınız Aga Nakliyat'a gönderilsin mi?");
     if(onay2){
@@ -350,6 +359,7 @@ function cevap(onay) {
  
 </body>
 </html>
+
 
 
 
