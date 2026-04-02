@@ -2744,5 +2744,11 @@ footer {
     }
 }
 
+/* Örnek kullanım */
+.kart-resmi {
+    width: 100%;
+    height: 250px;     /* Sabit bir yükseklik verdiysen */
+    object-fit: contain; /* Fotoğrafın hiçbir yerini kesmez, tamamını sığdırır */
+}
 
 
